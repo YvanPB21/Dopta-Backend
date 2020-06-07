@@ -2,13 +2,14 @@ package com.dopta.model;
 
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.awt.*;
 
-@Data @NoArgsConstructor
+@Data @NoArgsConstructor @Builder
 @AllArgsConstructor @Entity
 @Table(name="adoption_processes")
 public class AdoptionProcess {
