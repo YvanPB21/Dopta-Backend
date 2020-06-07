@@ -2,6 +2,7 @@ package com.dopta.repository;
 
 import com.dopta.model.AdoptionProcess;
 import com.dopta.model.Pet;
+import com.dopta.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

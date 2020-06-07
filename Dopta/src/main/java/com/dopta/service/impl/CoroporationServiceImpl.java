@@ -25,6 +25,7 @@ public class CoroporationServiceImpl implements CorporationService {
     @Override
     @Transactional
     public Corporation save(Corporation corporation) {
+
         return corporationRepository.save(corporation);
     }
 

@@ -1,6 +1,8 @@
 package com.dopta.controller;
 
+import com.dopta.model.Locatable;
 import com.dopta.model.Person;
+import com.dopta.model.User;
 import com.dopta.service.PersonService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +28,7 @@ public class PersonController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Person>getById(@PathVariable Integer id){
+    public ResponseEntity<User>getById(@PathVariable Integer id){
         Person person = personService.getPerson(id);
         if(person==null)
             return ResponseEntity.notFound().build();
@@ -49,5 +51,6 @@ public class PersonController {
         personService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
+
 
 }
