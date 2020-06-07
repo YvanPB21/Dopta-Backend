@@ -7,7 +7,8 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-@Data @NoArgsConstructor
+@Data
+@NoArgsConstructor
 @AllArgsConstructor @Entity
 @DiscriminatorValue("1")
 @Table(name="persons")

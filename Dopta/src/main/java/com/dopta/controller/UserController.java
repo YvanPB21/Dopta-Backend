@@ -20,7 +20,6 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-
     @GetMapping
     public ResponseEntity<List<User>> listUser(){
     List<User> users = new ArrayList<>();
