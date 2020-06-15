@@ -1,5 +1,9 @@
 package com.dopta.service.Impl;
 
+import com.dopta.dto.converter.PetDTOConverter;
+import com.dopta.dto.pet.CreatePetDTO;
+import com.dopta.dto.pet.EditPetDTO;
+import com.dopta.dto.pet.PetDTO;
 import com.dopta.model.Pet;
 import com.dopta.model.Species;
 import com.dopta.model.User;
@@ -12,51 +16,43 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
 @Service
 public class PetServiceImpl implements PetService {
 
     @Autowired
     private PetRepository petRepository;
+    @Autowired
+    private PetDTOConverter petDTOConverter;
 
-    @Override
-    public Pet getPet(Integer id) {
-        return petRepository.findById(id).orElse(null);
-    }
-
-    @Override
-    @Transactional
-    public Pet save(Pet pet) {
+   @Override
+    public Pet save(CreatePetDTO petDTO) {
+        Pet pet = petDTOConverter.convertToEntity(petDTO);
         return petRepository.save(pet);
     }
 
     @Override
-    public Optional<Pet> findById(Integer id) {
-        return petRepository.findById(id);
+    public Optional<PetDTO> findById(Integer id) {
+        return petRepository.findById(id).map(petDTOConverter::convertToDto);
     }
 
     @Override
-    public List<Pet> listAllPets() {
-        return petRepository.findAll();
+    public List<PetDTO> listAllPets() {
+        List<PetDTO> petsDTO = petRepository.findAll().stream().map(petDTOConverter::convertToDto)
+                .collect(Collectors.toList());
+        return petsDTO;
     }
 
     @Override
     @Transactional
-    public Pet edit(Pet pet, Integer id) {
+    public Pet edit(EditPetDTO petDTO, Integer id) {
         return petRepository.findById(id).map(p->{
-            p.setDate_of_birth(pet.getDate_of_birth());
-            p.setImage_url(pet.getImage_url());
-            p.setIs_adopted(pet.getIs_adopted());
-            p.setName(pet.getName());
-            p.setSize(pet.getSize());
-            p.setSpecies(pet.getSpecies());
-            p.setSex(pet.getSex());
+            p.setName(petDTO.getName());
+            p.setImage_url(petDTO.getImage_url());
+            p.setIs_adopted(petDTO.getIs_adopted());
             return petRepository.save(p);
         }).orElse(null);
-    }
-
-    @Override
-    public List<Pet> findBySpecies(Species species) {
-        return petRepository.findBySpecies(species);
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.dopta.model;
 
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,6 +11,7 @@ import java.awt.*;
 
 @Data @NoArgsConstructor
 @AllArgsConstructor @Entity
+@Builder
 @Table(name="adoption_processes")
 public class AdoptionProcess {
     @Id

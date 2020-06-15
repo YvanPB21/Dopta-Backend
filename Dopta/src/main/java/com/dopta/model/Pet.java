@@ -23,17 +23,17 @@ public class Pet {
     private java.util.Date date_of_birth;
 
     @NotNull
-    @ManyToOne(fetch=FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name="size_id")
     private Size size;
 
     @NotNull
-    @ManyToOne(fetch=FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name="species_id")
     private Species species;
 
     @NotNull
-    @ManyToOne(fetch=FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name="sex_id")
     private Sex sex;
 
