@@ -1,5 +1,8 @@
 package com.dopta.controller;
 
+import com.dopta.dto.adoptionprocess.AdoptionProcessDTO;
+import com.dopta.dto.adoptionprocess.CreateAdoptionProcessDTO;
+import com.dopta.dto.adoptionprocess.EditAdoptionProcessDTO;
 import com.dopta.model.AdoptionProcess;
 import com.dopta.model.Pet;
 import com.dopta.model.User;
@@ -12,7 +15,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
+@CrossOrigin(origins="http://localhost4200")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/adoption")
@@ -21,47 +26,41 @@ public class AdoptionProcessController {
     private AdoptionProcessService adoptionProcessService;
 
     @GetMapping
-    public ResponseEntity<List<AdoptionProcess>> listAdoption(@RequestParam(name="PetId", required=false)Integer petId)
+    public ResponseEntity<?> getAll()
     {
-        List<AdoptionProcess> adoptions=new ArrayList<>();
-        if(null==petId)
+        List<AdoptionProcessDTO> adoptions=adoptionProcessService.listAllAdoptions();
+        if (adoptions.isEmpty())
         {
-            adoptions=adoptionProcessService.listAllAdoptions();
-            if(adoptions.isEmpty())
-            {
-                return ResponseEntity.noContent().build();
-            }
-        }else
-        {
-                adoptions=adoptionProcessService.findByPet(Pet.builder().id(petId).build());
+            return ResponseEntity.notFound().build();
+        }else{
+            return ResponseEntity.ok(adoptions);
         }
-        return ResponseEntity.ok(adoptions);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<AdoptionProcess>getById(@PathVariable Integer id)
+    public ResponseEntity<?>getById(@PathVariable Integer id)
     {
-        AdoptionProcess adoptionProcess=adoptionProcessService.getAdoption(id);
-        if (adoptionProcess==null)
+        Optional<AdoptionProcessDTO> result = adoptionProcessService.findById(id);
+        if(!result.isPresent())
             return ResponseEntity.notFound().build();
         else
-            return (ResponseEntity.ok(adoptionProcess));
+            return ResponseEntity.ok(result);
     }
 
     @PostMapping
-    public ResponseEntity<AdoptionProcess> newAdoption(@RequestBody AdoptionProcess adoptionProcess)
+    public ResponseEntity<?> newAdoption(@RequestBody CreateAdoptionProcessDTO adoptionProcessDTO)
     {
-        return ResponseEntity.status(HttpStatus.CREATED).body(adoptionProcessService.save(adoptionProcess));
+        return ResponseEntity.status(HttpStatus.CREATED).body(adoptionProcessService.save(adoptionProcessDTO));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<AdoptionProcess> updateAdoption(@RequestBody AdoptionProcess adoptionProcess, @PathVariable Integer id)
+    public ResponseEntity<?> updateAdoption(@RequestBody EditAdoptionProcessDTO adoptionProcess, @PathVariable Integer id)
     {
         return ResponseEntity.status(HttpStatus.OK).body(adoptionProcessService.edit(adoptionProcess,id));
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<AdoptionProcess> deleteAdoption(@PathVariable Integer id)
+    public ResponseEntity<?> deleteAdoption(@PathVariable Integer id)
     {
         adoptionProcessService.deleteById(id);
         return ResponseEntity.noContent().build();

@@ -22,7 +22,6 @@ import java.util.Optional;
 public class PetController {
     @Autowired
     private PetService petService;
-
     @GetMapping("/pets")
     public ResponseEntity<?> getAll() {
         List<PetDTO> pets=petService.listAllPets();
@@ -33,7 +32,6 @@ public class PetController {
             return ResponseEntity.ok(pets);
         }
     }
-
     @GetMapping("/pets/{id}")
     public ResponseEntity<?> getPetById(@PathVariable Integer id) {
         Optional<PetDTO> result = petService.findById(id);
@@ -42,23 +40,15 @@ public class PetController {
         else
             return ResponseEntity.ok(result);
     }
-
-
     @PostMapping("/pets")
     public ResponseEntity<?> newPet (@RequestBody CreatePetDTO petDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(petService.save(petDto));
 
     }
-
-
-
     @PutMapping("/pets/{id}")
     public ResponseEntity<?> updateProduct(@RequestBody EditPetDTO petDto, @PathVariable Integer id) {
         return ResponseEntity.status(HttpStatus.OK).body(petService.edit(petDto,id));
     }
-
-
-
     @DeleteMapping("/pets/{id}")
     public ResponseEntity<?> deleteProduct(@PathVariable Integer id) {
         petService.deleteById(id);
