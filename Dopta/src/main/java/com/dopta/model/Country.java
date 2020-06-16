@@ -12,16 +12,13 @@ import javax.persistence.*;
 @Builder
 @AllArgsConstructor
 @Entity
-@Table(name="districts")
-public class Districts {
+@Table(name="countries")
+public class Country {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
-    @ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name="departments_id")
-    private Departments departmentsid;
     @OneToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="locatable_id")
-    private Locatable locatableid;
+    private Locatable locatable;
 }

@@ -7,7 +7,6 @@ import com.dopta.model.Pet;
 import com.dopta.model.Species;
 import com.dopta.service.PetService;
 import lombok.RequiredArgsConstructor;
-import org.omg.CORBA.INTERNAL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

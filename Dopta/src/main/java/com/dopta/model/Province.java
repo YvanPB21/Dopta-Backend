@@ -20,8 +20,8 @@ public class Province {
     private String name;
     @OneToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="locatable_id")
-    private Locatable locatableid;
+    private Locatable locatable;
     @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="countrie_id")
-    private Countries countrieid;
+    private Country country;
 }
