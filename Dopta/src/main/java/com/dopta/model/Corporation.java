@@ -4,9 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Data @NoArgsConstructor
@@ -16,4 +14,7 @@ import javax.validation.constraints.NotNull;
 public class Corporation extends User{
     private String name;
     private Integer ruc;
+    @OneToOne(fetch= FetchType.EAGER)
+    @JoinColumn(name="user_id")
+    private User user;
 }

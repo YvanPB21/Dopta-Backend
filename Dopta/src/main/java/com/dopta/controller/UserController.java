@@ -1,5 +1,8 @@
 package com.dopta.controller;
 
+import com.dopta.dto.user.CreateUserDTO;
+import com.dopta.dto.user.EditUserDTO;
+import com.dopta.dto.user.UserDTO;
 import com.dopta.model.User;
 import com.dopta.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -8,10 +11,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.ws.Response;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/users")
@@ -22,29 +26,34 @@ public class UserController {
 
 
     @GetMapping
-    public ResponseEntity<List<User>> listUser(){
-    List<User> users = new ArrayList<>();
-    users=userService.listAllUser();
-    return ResponseEntity.ok(users);
+    public ResponseEntity<?> getAll() {
+        List<UserDTO> users=userService.listAllUser();
+
+        if (users.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        } else {
+            return ResponseEntity.ok(users);
+        }
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User>getById(@PathVariable Integer id){
-        User user = userService.getUser(id);
-        if(user==null)
+    public ResponseEntity<?> getPetById(@PathVariable Integer id) {
+        Optional<UserDTO> result = userService.findById(id);
+        if (!result.isPresent())
             return ResponseEntity.notFound().build();
         else
-            return (ResponseEntity.ok(user));
+            return ResponseEntity.ok(result);
     }
 
+
     @PostMapping
-    public ResponseEntity<User> newUser(@RequestBody User user){
-        return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(user));
+    public ResponseEntity<User> newUser(@RequestBody CreateUserDTO userDTO){
+        return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(userDTO));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@RequestBody User user, @PathVariable Integer id){
-        return ResponseEntity.status(HttpStatus.OK).body(userService.edit(user,id));
+    public ResponseEntity<User> updateUser(@RequestBody EditUserDTO userDTO, @PathVariable Integer id){
+        return ResponseEntity.status(HttpStatus.OK).body(userService.edit(userDTO,id));
     }
 
     @DeleteMapping("/{id}")

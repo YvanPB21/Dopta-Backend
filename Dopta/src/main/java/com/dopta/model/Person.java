@@ -28,4 +28,8 @@ public class Person extends User{
     @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="gender_id")
     private Gender gender;
+
+    @OneToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name="user_id")
+    private User user;
 }

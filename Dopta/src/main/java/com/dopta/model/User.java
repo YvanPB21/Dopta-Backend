@@ -25,4 +25,15 @@ public class User {
 
     private String password;
 
+    @OneToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name="user_profile_id")
+    private UserProfile userProfile;
+
+    @OneToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name="person_id")
+    private Person person;
+
+    @OneToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name="corporation_id")
+    private Corporation corporation;
 }

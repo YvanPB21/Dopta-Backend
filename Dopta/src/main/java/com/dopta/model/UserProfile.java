@@ -13,15 +13,16 @@ import javax.validation.constraints.NotNull;
 @Table(name="user_profiles")
 public class UserProfile extends User {
 
-
-    private Integer district_id;
-
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name="district_id")
+    private District district;
     private String profile_pic_url;
-
-
     @Temporal(TemporalType.TIMESTAMP)
     private java.util.Date date_of_registration;
-
-
-    private Integer locatable_id;
+    @OneToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name="locatable_id")
+    private Locatable locatable;
+    @OneToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name="user_id")
+    private User user;
 }

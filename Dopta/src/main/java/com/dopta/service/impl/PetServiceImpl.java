@@ -27,6 +27,7 @@ public class PetServiceImpl implements PetService {
     private PetDTOConverter petDTOConverter;
 
    @Override
+   @Transactional
     public Pet save(CreatePetDTO petDTO) {
         Pet pet = petDTOConverter.convertToEntity(petDTO);
         return petRepository.save(pet);

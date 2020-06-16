@@ -2,7 +2,6 @@ package com.dopta.controller;
 
 import com.dopta.model.Districts;
 import com.dopta.model.Province;
-import com.dopta.service.DistrictsService;
 import com.dopta.service.ProvinceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
