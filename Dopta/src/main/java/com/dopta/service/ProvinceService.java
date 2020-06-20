@@ -1,6 +1,6 @@
 package com.dopta.service;
 
-import com.dopta.model.Districts;
+import com.dopta.model.District;
 import com.dopta.model.Province;
 
 import java.util.List;

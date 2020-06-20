@@ -1,7 +1,7 @@
 package com.dopta.service;
 
 import com.dopta.model.Country;
-import com.dopta.model.Departments;
+import com.dopta.model.Department;
 
 import java.util.List;
 

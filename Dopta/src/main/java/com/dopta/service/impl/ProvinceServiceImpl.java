@@ -1,8 +1,8 @@
 package com.dopta.service.impl;
 
-import com.dopta.model.Districts;
+import com.dopta.model.District;
 import com.dopta.model.Province;
-import com.dopta.repository.DistrictsRepository;
+import com.dopta.repository.DistrictRepository;
 import com.dopta.repository.ProvinceRepository;
 import com.dopta.service.ProvinceService;
 import org.springframework.beans.factory.annotation.Autowired;

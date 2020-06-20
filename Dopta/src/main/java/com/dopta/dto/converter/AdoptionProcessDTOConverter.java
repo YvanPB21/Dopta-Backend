@@ -24,8 +24,8 @@ public class AdoptionProcessDTOConverter {
 
             @Override
             protected void configure() {
-                map().setAdopter(source.getAdopter().getNames().concat(" ").concat(source.getAdopter().getLast_names()));
-                map().setPoster(source.getPoster().getNames().concat(" ").concat(source.getAdopter().getLast_names()));
+                map().setAdopter(source.getAdopter().getNames());
+                map().setPoster(source.getPoster().getNames());
                 map().setPet(source.getPet().getName());
             }
         });

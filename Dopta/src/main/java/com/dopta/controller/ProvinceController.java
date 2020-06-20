@@ -1,6 +1,6 @@
 package com.dopta.controller;
 
-import com.dopta.model.Districts;
+import com.dopta.model.District;
 import com.dopta.model.Province;
 import com.dopta.service.ProvinceService;
 import lombok.RequiredArgsConstructor;

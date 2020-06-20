@@ -54,11 +54,9 @@ public class AdoptionProcessServiceImpl implements AdoptionProcessService {
     public AdoptionProcess edit(EditAdoptionProcessDTO adoptionProcessDTO, Integer id) {
         AdoptionProcess adoptionProcess=adoptionProcessDTOConverter.convertToEntity(adoptionProcessDTO);
         return adoptionProcessRepository.findById(id).map(a->{
-            a.setAdopter(adoptionProcess.getAdopter());
             a.setDate_adopted(adoptionProcess.getDate_adopted());
             a.setDate_published(adoptionProcess.getDate_published());
             a.setPet(adoptionProcess.getPet());
-            a.setPoster(adoptionProcess.getPoster());
             a.setDescription(adoptionProcess.getDescription());
             return adoptionProcessRepository.save(a);
         }).orElse(null);
