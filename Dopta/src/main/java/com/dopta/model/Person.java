@@ -1,35 +1,39 @@
 package com.dopta.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 
-@Data @NoArgsConstructor
-@AllArgsConstructor @Entity
-@DiscriminatorValue("1")
-@Table(name="persons")
-public class Person extends User{
+@Entity
+@Table(name = "persons")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@ToString
+public class Person {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    private String names;
+    @JsonIgnore
+    @OneToOne(cascade = CascadeType.ALL,mappedBy = "person")
+    private UserSignIn user;
 
-    private String last_names;
+    @Column(name = "first_name",nullable = false,length = 80)
+    private String firstName;
 
-    private Integer dni;
+    @Column(name = "last_name",nullable = false,length = 80)
+    private String lastName;
 
+    @Column(name = "date_of_birth")
+    @JsonSerialize(using = ToStringSerializer.class)
+    private LocalDate dateOfBirth;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private java.util.Date date_of_birth;
-
-    private Float rating;
-
-    @ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name="gender_id")
-    private Gender gender;
-
-    @OneToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name="user_id")
-    private User user;
+    @Column(name = "dni",nullable = false,length = 8)
+    private String dni;
 }

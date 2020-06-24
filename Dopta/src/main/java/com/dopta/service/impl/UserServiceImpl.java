@@ -1,65 +1,58 @@
 package com.dopta.service.impl;
 
-import com.dopta.dto.converter.UserDTOConverter;
-import com.dopta.dto.user.CreateUserDTO;
-import com.dopta.dto.user.EditUserDTO;
-import com.dopta.dto.user.UserDTO;
-import com.dopta.model.User;
+
+import com.dopta.model.UserSignIn;
 import com.dopta.repository.UserRepository;
 import com.dopta.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.DiscriminatorValue;
-import javax.transaction.Transactional;
-import java.beans.Transient;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
-@Service
-public class UserServiceImpl implements UserService {
+@Service("userDetailsService")
+public class UserServiceImpl implements UserDetailsService, UserService {
 
     @Autowired
     private UserRepository userRepository;
-    @Autowired
-    private UserDTOConverter userDTOConverter;
+
+    @Value("${hampserver.default-rol}")
+    private Long DEFAULT_ROL;
 
     @Override
-    @Transactional
-    public User save(CreateUserDTO userDTO) {
-        User user = userDTOConverter.convertToEntity(userDTO);
-        return userRepository.save(user);
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        UserSignIn user = userRepository.findOneByUsername(username);
+        if (user == null) {
+            throw new UsernameNotFoundException(String.format("Usuario no existe", username));
+        }
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        user.getRoles().forEach(role -> {
+            authorities.add(new SimpleGrantedAuthority(role.getName()));
+        });
+        UserDetails userDetails = new User(user.getUsername(), user.getPassword(), authorities);
+        return userDetails;
     }
 
     @Override
-    public Optional<UserDTO> findById(Integer id) {
-        return userRepository.findById(id).map(userDTOConverter::convertToDto);
-    }
-
-    @Override
-    public List<UserDTO> listAllUser() {
-        List<UserDTO> usersDTO = userRepository.findAll().stream().map(userDTOConverter::convertToDto)
-                .collect(Collectors.toList());
-        return usersDTO;
-    }
-
-    @Override
-    @Transactional
-    public User edit(EditUserDTO userDTO, Integer id) {
-        return userRepository.findById(id).map(u->{
-            u.setUsername(userDTO.getUsername());
-            u.setEmail_address(userDTO.getEmail_address());
-            u.setPassword(userDTO.getPassword());
-            return userRepository.save(u);
-        }).orElse(null);
+    public Page<UserSignIn> getAllUsers(Pageable pageable) {
+        return userRepository.findAll(pageable);
     }
 
     @Override
     @Transactional
-    public void deleteById(Integer id)
-    {
-        userRepository.deleteById(id);
+    public UserSignIn registerUser(UserSignIn user) {
+        UserSignIn userNew = userRepository.save(user); //save tabla user y person
+        userRepository.register(userNew.getIdUser(), DEFAULT_ROL);//save tabla user_roles
+        return userNew;
     }
-
 }

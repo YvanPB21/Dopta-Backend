@@ -1,23 +1,10 @@
 package com.dopta.service;
 
-
-import com.dopta.dto.pet.CreatePetDTO;
-import com.dopta.dto.pet.EditPetDTO;
-import com.dopta.dto.pet.PetDTO;
-import com.dopta.dto.user.CreateUserDTO;
-import com.dopta.dto.user.EditUserDTO;
-import com.dopta.dto.user.UserDTO;
-import com.dopta.model.Pet;
-import com.dopta.model.User;
-
-import java.util.List;
-import java.util.Optional;
+import com.dopta.model.UserSignIn;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface UserService {
-
-    User save(CreateUserDTO userDTO);
-    Optional<UserDTO> findById(Integer id);
-    List<UserDTO> listAllUser();
-    User edit(EditUserDTO userDTO, Integer id);
-    void deleteById(Integer id);
+    Page<UserSignIn> getAllUsers(Pageable pageable);
+    public UserSignIn registerUser(UserSignIn user);
 }

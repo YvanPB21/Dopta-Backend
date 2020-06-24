@@ -1,65 +1,55 @@
 package com.dopta.controller;
 
-import com.dopta.dto.user.CreateUserDTO;
-import com.dopta.dto.user.EditUserDTO;
-import com.dopta.dto.user.UserDTO;
-import com.dopta.model.User;
+import com.dopta.model.UserSignIn;
+import com.dopta.resource.SaveUserResource;
+import com.dopta.resource.UserResource;
 import com.dopta.service.UserService;
-import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
-@CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequiredArgsConstructor
-@RequestMapping("/users")
+@RequestMapping("/api/users")
 public class UserController {
-
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private ModelMapper mapper;
 
     @GetMapping
-    public ResponseEntity<?> getAll() {
-        List<UserDTO> users=userService.listAllUser();
-
-        if (users.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        } else {
-            return ResponseEntity.ok(users);
-        }
+    public ResponseEntity<Page<UserResource>> getAllUsers(Pageable pageable) {
+        Page<UserSignIn> usersPage = userService.getAllUsers(pageable);
+        List<UserResource> resources = usersPage.getContent().stream().map(this::convertToResource).collect(Collectors.toList());
+        Page<UserResource> page=new PageImpl<>(resources);
+        //return new PageImpl<>(resources, pageable, resources.size());
+        return new ResponseEntity<Page<UserResource>>(page, HttpStatus.OK);
     }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<?> getPetById(@PathVariable Integer id) {
-        Optional<UserDTO> result = userService.findById(id);
-        if (!result.isPresent())
-            return ResponseEntity.notFound().build();
-        else
-            return ResponseEntity.ok(result);
-    }
-
 
     @PostMapping
-    public ResponseEntity<User> newUser(@RequestBody CreateUserDTO userDTO){
-        return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(userDTO));
+    // public ResponseEntity<UserResource> createUser(@Valid @RequestBody SaveUserResource resource)  {
+    public ResponseEntity<Object> createUser(@Valid @RequestBody UserSignIn user)  {
+        //UserSignIn user = convertToEntity(resource);
+        //UserResource userResource=convertToResource(userService.registerUser(user));
+        userService.registerUser(user);
+        return new ResponseEntity<Object>(HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@RequestBody EditUserDTO userDTO, @PathVariable Integer id){
-        return ResponseEntity.status(HttpStatus.OK).body(userService.edit(userDTO,id));
+
+    private UserSignIn convertToEntity(SaveUserResource resource) {
+        return mapper.map(resource, UserSignIn.class);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<User> deleteUser(@PathVariable Integer id){
-        userService.deleteById(id);
-        return ResponseEntity.noContent().build();
+    private UserResource convertToResource(UserSignIn entity) {
+        return mapper.map(entity, UserResource.class);
     }
-
 }

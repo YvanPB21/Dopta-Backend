@@ -1,56 +1,68 @@
 package com.dopta.controller;
 
-import com.dopta.model.Locatable;
+
 import com.dopta.model.Person;
-import com.dopta.model.User;
+import com.dopta.resource.PersonResource;
+import com.dopta.resource.SavePersonResource;
 import com.dopta.service.PersonService;
-import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.util.ArrayList;
+import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
-@RequiredArgsConstructor
-@RequestMapping("/persons")
+@RequestMapping("/api/persons")
 public class PersonController {
+
+    @Autowired
+    private ModelMapper mapper;
+
     @Autowired
     private PersonService personService;
 
-    @GetMapping
-    public ResponseEntity<List<Person>> listPerson(){
-        List<Person> persons = new ArrayList<>();
-        persons=personService.listAllPerson();
-        return ResponseEntity.ok(persons);
-    }
+   /* @GetMapping
+    public ResponseEntity<Page<PersonResource>> getAllPersons(Pageable pageable) {
+        Page<Person> personPage = personService.getAllPersons(pageable);
+        List<PersonResource> resources = personPage.getContent().stream().map(this::convertToResource).collect(Collectors.toList());
+        Page<PersonResource> page=new PageImpl<>(resources);
+        //return new PageImpl<>(resources, pageable, resources.size());
+        return new ResponseEntity<Page<PersonResource>>(page, HttpStatus.OK);
+    }*/
 
-    @GetMapping("/{id}")
-    public ResponseEntity<User>getById(@PathVariable Integer id){
-        Person person = personService.getPerson(id);
-        if(person==null)
-            return ResponseEntity.notFound().build();
-        else
-            return (ResponseEntity.ok(person));
+    @GetMapping
+    public ResponseEntity<List<PersonResource>> getAllPersons() {
+        List<Person> persons = personService.getAllPersons();
+        List<PersonResource> personResources = persons.stream().map(this::convertToResource).collect(Collectors.toList());
+        return new ResponseEntity<List<PersonResource>>(personResources, HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<Person> newPerson(@RequestBody Person person){
-        return ResponseEntity.status(HttpStatus.CREATED).body(personService.save(person));
+    public ResponseEntity<PersonResource> createPerson(@Valid @RequestBody SavePersonResource resource)  {
+        Person person = convertToEntity(resource);
+        PersonResource personResource=convertToResource(personService.createPerson(person));
+        //localhost:8080/api/outcomes/1
+        URI location= ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/api/{id}")
+                .buildAndExpand(personResource.getPersonId()).toUri();
+        return ResponseEntity.created(location).build();
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Person> updatePerson(@RequestBody Person person, @PathVariable Integer id){
-        return ResponseEntity.status(HttpStatus.OK).body(personService.edit(person,id));
+
+
+    private Person convertToEntity(SavePersonResource resource) {
+        return mapper.map(resource, Person.class);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Person> deletePerson(@PathVariable Integer id){
-        personService.deleteById(id);
-        return ResponseEntity.noContent().build();
+    private PersonResource convertToResource(Person entity) {
+        return mapper.map(entity, PersonResource.class);
     }
-
 
 }
