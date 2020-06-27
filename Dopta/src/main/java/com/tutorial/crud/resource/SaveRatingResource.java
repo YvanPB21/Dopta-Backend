@@ -1,11 +1,10 @@
 package com.tutorial.crud.resource;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.sun.istack.NotNull;
 
 import java.math.BigDecimal;
 
-@Getter @Setter
-public class RatingResource {
+public class SaveRatingResource {
+    @NotNull
     private BigDecimal rating;
 }
