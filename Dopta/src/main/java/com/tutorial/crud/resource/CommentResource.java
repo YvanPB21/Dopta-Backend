@@ -5,6 +5,7 @@ import lombok.Setter;
 
 @Getter @Setter
 public class CommentResource {
+    private Integer id;
     private String content;
     private java.util.Date date;
 }
