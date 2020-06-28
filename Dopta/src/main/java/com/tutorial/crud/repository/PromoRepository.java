@@ -1,9 +1,7 @@
 package com.tutorial.crud.repository;
 
 
-import com.tutorial.crud.entity.Corporation;
-import com.tutorial.crud.entity.Promo;
-import com.tutorial.crud.entity.User;
+import com.tutorial.crud.model.Promo;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

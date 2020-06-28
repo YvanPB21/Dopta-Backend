@@ -1,6 +1,6 @@
 package com.tutorial.crud.service.impl;
 
-import com.tutorial.crud.entity.Species;
+import com.tutorial.crud.model.Species;
 import com.tutorial.crud.exception.ResourceNotFoundException;
 import com.tutorial.crud.repository.SpeciesRepository;
 import com.tutorial.crud.service.SpeciesService;
@@ -21,7 +21,7 @@ public class SpeciesServiceImpl implements SpeciesService {
     }
 
     @Override
-    public Page<Species> getAllSpecies(Pageable pageable) {
+    public Page<Species> getAllSpecies(Integer speciesId, Pageable pageable) {
         return speciesRepository.findAll(pageable);
     }
 

@@ -1,14 +1,10 @@
 package com.tutorial.crud.service;
 
-import com.tutorial.crud.entity.AdoptionProcess;
-import com.tutorial.crud.entity.Pet;
+import com.tutorial.crud.model.AdoptionProcess;
+import com.tutorial.crud.model.Pet;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-
-import javax.xml.ws.Response;
-import java.util.List;
-import java.util.Optional;
 
 public interface AdoptionProcessService {
     AdoptionProcess getAdoptionProcessById(Integer id);

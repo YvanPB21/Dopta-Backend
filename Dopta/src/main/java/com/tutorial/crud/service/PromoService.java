@@ -1,13 +1,10 @@
 package com.tutorial.crud.service;
 
 
-import com.tutorial.crud.entity.Promo;
+import com.tutorial.crud.model.Promo;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-
-import java.util.List;
-import java.util.Optional;
 
 public interface PromoService {
     Promo getPromoById(Integer promoId);

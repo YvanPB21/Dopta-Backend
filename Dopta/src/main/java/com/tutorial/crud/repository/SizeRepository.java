@@ -1,7 +1,7 @@
 package com.tutorial.crud.repository;
 
 
-import com.tutorial.crud.entity.Size;
+import com.tutorial.crud.model.Size;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

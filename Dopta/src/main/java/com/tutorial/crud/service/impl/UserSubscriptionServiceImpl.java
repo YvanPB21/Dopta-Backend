@@ -1,8 +1,7 @@
 package com.tutorial.crud.service.impl;
 
 
-import com.tutorial.crud.entity.SubscriptionPlan;
-import com.tutorial.crud.entity.UserSubscription;
+import com.tutorial.crud.model.UserSubscription;
 import com.tutorial.crud.exception.ResourceNotFoundException;
 import com.tutorial.crud.repository.SubscriptionPlanRepository;
 import com.tutorial.crud.repository.UserRepository;
@@ -15,8 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserSubscriptionServiceImpl implements UserSubscriptionService {
@@ -45,11 +42,6 @@ public class UserSubscriptionServiceImpl implements UserSubscriptionService {
     @Override
     public Page<UserSubscription> getUserSubscriptionByUserIdAndSubscriptionPlanId(Integer userId, Integer subscriptionPlanId, Pageable pageable) {
         return userSubscriptionRepository.findAllBySubscriptionPlanIdAndUserId(subscriptionPlanId,userId,pageable);
-    }
-
-    @Override
-    public Page<UserSubscription> getAllSubscriptions(Pageable pageable) {
-        return userSubscriptionRepository.findAll(pageable);
     }
 
     @Override

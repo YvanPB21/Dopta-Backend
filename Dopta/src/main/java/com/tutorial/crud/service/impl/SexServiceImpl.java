@@ -1,6 +1,6 @@
 package com.tutorial.crud.service.impl;
 
-import com.tutorial.crud.entity.Sex;
+import com.tutorial.crud.model.Sex;
 import com.tutorial.crud.exception.ResourceNotFoundException;
 import com.tutorial.crud.repository.SexRepository;
 import com.tutorial.crud.service.SexService;
@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -22,7 +21,7 @@ public class SexServiceImpl implements SexService {
     }
 
     @Override
-    public Page<Sex> getAllSexes(Pageable pageable) {
+    public Page<Sex> getAllSexes(Integer sexId, Pageable pageable) {
         return sexRepository.findAll(pageable);
     }
 

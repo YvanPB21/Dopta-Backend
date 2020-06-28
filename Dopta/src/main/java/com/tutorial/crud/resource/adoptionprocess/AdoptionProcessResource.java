@@ -6,6 +6,8 @@ import com.tutorial.crud.entity.Pet;
 import lombok.Data;
 
 import javax.persistence.*;
+import lombok.Data;
+
 @Data
 public class AdoptionProcessResource {
     private Integer id;

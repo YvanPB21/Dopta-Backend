@@ -1,7 +1,7 @@
 package com.tutorial.crud.service.impl;
 
 
-import com.tutorial.crud.entity.Pet;
+import com.tutorial.crud.model.Pet;
 import com.tutorial.crud.exception.ResourceNotFoundException;
 import com.tutorial.crud.repository.PetRepository;
 import com.tutorial.crud.repository.SexRepository;
@@ -15,9 +15,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class PetServiceImpl implements PetService {

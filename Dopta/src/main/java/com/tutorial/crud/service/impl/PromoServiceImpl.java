@@ -1,7 +1,7 @@
 package com.tutorial.crud.service.impl;
 
 
-import com.tutorial.crud.entity.Promo;
+import com.tutorial.crud.model.Promo;
 import com.tutorial.crud.exception.ResourceNotFoundException;
 import com.tutorial.crud.repository.CorporationRepository;
 import com.tutorial.crud.repository.PromoRepository;
@@ -11,10 +11,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class PromoServiceImpl implements PromoService {

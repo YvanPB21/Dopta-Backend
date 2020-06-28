@@ -1,7 +1,6 @@
 package com.tutorial.crud.service.impl;
 
-import com.tutorial.crud.entity.Size;
-import com.tutorial.crud.entity.Size;
+import com.tutorial.crud.model.Size;
 import com.tutorial.crud.exception.ResourceNotFoundException;
 import com.tutorial.crud.repository.SizeRepository;
 import com.tutorial.crud.service.SizeService;
@@ -22,7 +21,7 @@ public class SizeServiceImpl implements SizeService {
     }
 
     @Override
-    public Page<Size> getAllSizes(Pageable pageable) {
+    public Page<Size> getAllSizes(Integer sizeId, Pageable pageable) {
         return sizeRepository.findAll(pageable);
     }
 

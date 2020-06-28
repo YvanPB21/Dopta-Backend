@@ -1,7 +1,6 @@
 package com.tutorial.crud.repository;
 
-
-import com.tutorial.crud.entity.Gender;
+import com.tutorial.crud.model.Gender;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

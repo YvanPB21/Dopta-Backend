@@ -1,12 +1,10 @@
 package com.tutorial.crud.resource.pet;
 
 import com.sun.istack.NotNull;
-import com.tutorial.crud.entity.Sex;
-import com.tutorial.crud.entity.Size;
-import com.tutorial.crud.entity.Species;
 import lombok.Data;
 
-import javax.persistence.*;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Data
 public class SavePetResource {

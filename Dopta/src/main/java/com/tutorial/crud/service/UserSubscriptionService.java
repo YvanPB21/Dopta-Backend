@@ -1,7 +1,6 @@
 package com.tutorial.crud.service;
 
-import com.tutorial.crud.entity.SubscriptionPlan;
-import com.tutorial.crud.entity.UserSubscription;
+import com.tutorial.crud.model.UserSubscription;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;

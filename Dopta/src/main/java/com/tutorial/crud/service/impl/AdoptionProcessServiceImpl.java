@@ -1,9 +1,11 @@
 package com.tutorial.crud.service.impl;
 
-import com.tutorial.crud.entity.AdoptionProcess;
-import com.tutorial.crud.entity.Pet;
+import com.tutorial.crud.model.AdoptionProcess;
+import com.tutorial.crud.model.Pet;
 import com.tutorial.crud.exception.ResourceNotFoundException;
-import com.tutorial.crud.repository.*;
+import com.tutorial.crud.repository.AdoptionProcessRepository;
+import com.tutorial.crud.repository.PersonRepository;
+import com.tutorial.crud.repository.PetRepository;
 import com.tutorial.crud.service.AdoptionProcessService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -12,9 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class AdoptionProcessServiceImpl implements AdoptionProcessService {

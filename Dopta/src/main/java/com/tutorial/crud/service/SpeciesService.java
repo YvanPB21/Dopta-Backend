@@ -1,6 +1,6 @@
 package com.tutorial.crud.service;
 
-import com.tutorial.crud.entity.Species;
+import com.tutorial.crud.model.Species;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;

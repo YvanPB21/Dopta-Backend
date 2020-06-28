@@ -1,8 +1,7 @@
 package com.tutorial.crud.service.impl;
 
 
-import com.tutorial.crud.entity.Promo;
-import com.tutorial.crud.entity.PromoCode;
+import com.tutorial.crud.model.PromoCode;
 import com.tutorial.crud.exception.ResourceNotFoundException;
 import com.tutorial.crud.repository.PromoCodeRepository;
 import com.tutorial.crud.repository.PromoRepository;
@@ -15,8 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class PromoCodeServiceImpl implements PromoCodeService {

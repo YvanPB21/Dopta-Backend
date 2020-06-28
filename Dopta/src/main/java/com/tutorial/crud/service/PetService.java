@@ -2,13 +2,10 @@ package com.tutorial.crud.service;
 
 
 
-import com.tutorial.crud.entity.Pet;
+import com.tutorial.crud.model.Pet;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-
-import java.util.List;
-import java.util.Optional;
 
 public interface PetService {
     Pet getPetById(Integer petId);
@@ -18,7 +15,6 @@ public interface PetService {
     Page<Pet> getPetsBySpeciesIdAndSizeId(Integer speciesId, Integer sizeId, Pageable pageable);
     Page<Pet> getPetsBySpeciesIdAndSexId(Integer speciesId, Integer sexId, Pageable pageable);
     Page<Pet> getPetsBySizeIdAndSexId(Integer sizeId, Integer sexId, Pageable pageable);
-    /*Probablemente no se use*/
     Page<Pet> getPetsBySpeciesIdAndSizeIdAndSexId(Integer speciesId, Integer sizeId, Integer sexId, Pageable pageable);
     Page<Pet> getAllPets(Pageable pageable);
     Pet createPet(Pet pet, Integer sizeId, Integer speciesId, Integer sexId);

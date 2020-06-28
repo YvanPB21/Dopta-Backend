@@ -6,6 +6,11 @@ import com.tutorial.crud.entity.Pet;
 import lombok.Data;
 
 import javax.persistence.*;
+import lombok.Data;
+
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
 @Data
 public class SaveAdoptionProcessResource {
     @NotNull

@@ -1,8 +1,7 @@
 package com.tutorial.crud.repository;
 
 
-import com.tutorial.crud.entity.Pet;
-import com.tutorial.crud.entity.Species;
+import com.tutorial.crud.model.Pet;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
