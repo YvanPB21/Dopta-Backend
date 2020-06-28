@@ -6,7 +6,7 @@ import lombok.Data;
 import java.math.BigDecimal;
 
 @Data
-public class SaveSubscriptionPlan {
+public class SaveSubscriptionPlanResource {
 
     @NotNull
     private String name;

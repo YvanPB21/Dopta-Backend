@@ -21,7 +21,7 @@ public class SpeciesServiceImpl implements SpeciesService {
     }
 
     @Override
-    public Page<Species> getAllSpecies(Integer speciesId, Pageable pageable) {
+    public Page<Species> getAllSpecies(Pageable pageable) {
         return speciesRepository.findAll(pageable);
     }
 

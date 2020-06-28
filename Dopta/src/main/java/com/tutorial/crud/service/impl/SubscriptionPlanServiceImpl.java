@@ -28,7 +28,7 @@ public class SubscriptionPlanServiceImpl implements SubscriptionPlanService {
     }
 
     @Override
-    public Page<SubscriptionPlan> getAllSubscriptionPlans(Integer subscriptionPlanId, Pageable pageable) {
+    public Page<SubscriptionPlan> getAllSubscriptionPlans(Pageable pageable) {
         return subscriptionPlanRepository.findAll(pageable);
     }
 

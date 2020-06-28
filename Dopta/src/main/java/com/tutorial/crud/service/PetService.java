@@ -18,6 +18,7 @@ public interface PetService {
     Page<Pet> getPetsBySpeciesIdAndSizeId(Integer speciesId, Integer sizeId, Pageable pageable);
     Page<Pet> getPetsBySpeciesIdAndSexId(Integer speciesId, Integer sexId, Pageable pageable);
     Page<Pet> getPetsBySizeIdAndSexId(Integer sizeId, Integer sexId, Pageable pageable);
+    /*Probablemente no se use*/
     Page<Pet> getPetsBySpeciesIdAndSizeIdAndSexId(Integer speciesId, Integer sizeId, Integer sexId, Pageable pageable);
     Page<Pet> getAllPets(Pageable pageable);
     Pet createPet(Pet pet, Integer sizeId, Integer speciesId, Integer sexId);

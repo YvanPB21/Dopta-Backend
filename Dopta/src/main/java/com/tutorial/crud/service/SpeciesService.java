@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 
 public interface SpeciesService {
     Species getSpeciesById(Integer speciesId);
-    Page<Species> getAllSpecies(Integer speciesId, Pageable pageable);
+    Page<Species> getAllSpecies(Pageable pageable);
     Species createSpecies(Species species);
     Species editSpecies(Species speciesRequest, Integer speciesId);
     ResponseEntity<?> deleteSpeciesById(Integer speciesId);

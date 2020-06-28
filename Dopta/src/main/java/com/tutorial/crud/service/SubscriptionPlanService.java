@@ -12,7 +12,7 @@ import java.util.Optional;
 
 public interface SubscriptionPlanService {
     SubscriptionPlan getSubscriptionPlanById(Integer subscriptionPlanId);
-    Page<SubscriptionPlan> getAllSubscriptionPlans(Integer subscriptionPlanId, Pageable pageable);
+    Page<SubscriptionPlan> getAllSubscriptionPlans(Pageable pageable);
     SubscriptionPlan createSubscriptionPlan(SubscriptionPlan subscriptionPlan);
     SubscriptionPlan editSubscriptionPlan(SubscriptionPlan subscriptionPlanRequest, Integer subscriptionPlanId);
     ResponseEntity<?> deleteSubscriptionPlanById(Integer subscriptionPlanId);

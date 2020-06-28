@@ -48,6 +48,11 @@ public class UserSubscriptionServiceImpl implements UserSubscriptionService {
     }
 
     @Override
+    public Page<UserSubscription> getAllSubscriptions(Pageable pageable) {
+        return userSubscriptionRepository.findAll(pageable);
+    }
+
+    @Override
     @Transactional
     public UserSubscription createUserSubscription(UserSubscription userSubscription, Integer userId, Integer subscriptionPlanId) {
         UserSubscription newUserSubscription=new UserSubscription();
