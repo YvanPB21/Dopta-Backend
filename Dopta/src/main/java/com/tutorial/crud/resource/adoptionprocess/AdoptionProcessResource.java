@@ -1,8 +1,6 @@
 package com.tutorial.crud.resource.adoptionprocess;
 
 import com.sun.istack.NotNull;
-import com.tutorial.crud.entity.Person;
-import com.tutorial.crud.entity.Pet;
 import lombok.Data;
 
 import javax.persistence.*;

@@ -1,7 +1,7 @@
 package com.tutorial.crud.controller;
 
 
-import com.tutorial.crud.entity.Species;
+import com.tutorial.crud.model.Species;
 import com.tutorial.crud.resource.species.SaveSpeciesResource;
 import com.tutorial.crud.resource.species.SpeciesResource;
 import com.tutorial.crud.service.SpeciesService;

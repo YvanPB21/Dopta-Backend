@@ -1,7 +1,7 @@
 package com.tutorial.crud.controller;
 
 
-import com.tutorial.crud.entity.SubscriptionPlan;
+import com.tutorial.crud.model.SubscriptionPlan;
 import com.tutorial.crud.resource.subscriptionplan.SaveSubscriptionPlanResource;
 import com.tutorial.crud.resource.subscriptionplan.SubscriptionPlanResource;
 import com.tutorial.crud.service.SubscriptionPlanService;

@@ -1,7 +1,7 @@
 package com.tutorial.crud.controller;
 
-import com.tutorial.crud.entity.Pet;
-import com.tutorial.crud.entity.PromoCode;
+import com.tutorial.crud.model.Pet;
+import com.tutorial.crud.model.PromoCode;
 import com.tutorial.crud.resource.pet.PetResource;
 import com.tutorial.crud.resource.pet.SavePetResource;
 import com.tutorial.crud.resource.promocode.PromoCodeResource;

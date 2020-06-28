@@ -4,6 +4,7 @@ import com.tutorial.crud.exception.ResourceNotFoundException;
 import com.tutorial.crud.model.Person;
 import com.tutorial.crud.repository.GenderRepository;
 import com.tutorial.crud.repository.PersonRepository;
+import com.tutorial.crud.repository.RatingRepository;
 import com.tutorial.crud.repository.UserRepository;
 import com.tutorial.crud.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;

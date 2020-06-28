@@ -21,7 +21,7 @@ public class SexServiceImpl implements SexService {
     }
 
     @Override
-    public Page<Sex> getAllSexes(Integer sexId, Pageable pageable) {
+    public Page<Sex> getAllSexes(Pageable pageable) {
         return sexRepository.findAll(pageable);
     }
 

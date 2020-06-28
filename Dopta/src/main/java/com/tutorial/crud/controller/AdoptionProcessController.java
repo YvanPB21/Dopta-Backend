@@ -1,6 +1,6 @@
 package com.tutorial.crud.controller;
 
-import com.tutorial.crud.entity.AdoptionProcess;
+import com.tutorial.crud.model.AdoptionProcess;
 import com.tutorial.crud.resource.adoptionprocess.AdoptionProcessResource;
 import com.tutorial.crud.resource.adoptionprocess.SaveAdoptionProcessResource;
 import com.tutorial.crud.service.AdoptionProcessService;

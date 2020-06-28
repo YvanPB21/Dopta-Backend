@@ -1,7 +1,7 @@
 package com.tutorial.crud.controller;
 
 
-import com.tutorial.crud.entity.Size;
+import com.tutorial.crud.model.Size;
 import com.tutorial.crud.resource.size.SaveSizeResource;
 import com.tutorial.crud.resource.size.SizeResource;
 import com.tutorial.crud.service.SizeService;

@@ -1,6 +1,6 @@
 package com.tutorial.crud.controller;
 
-import com.tutorial.crud.entity.Promo;
+import com.tutorial.crud.model.Promo;
 import com.tutorial.crud.resource.promo.PromoResource;
 import com.tutorial.crud.resource.promo.SavePromoResource;
 import com.tutorial.crud.service.PromoService;

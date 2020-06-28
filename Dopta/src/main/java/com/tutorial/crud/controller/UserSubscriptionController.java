@@ -1,6 +1,6 @@
 package com.tutorial.crud.controller;
 
-import com.tutorial.crud.entity.UserSubscription;
+import com.tutorial.crud.model.UserSubscription;
 import com.tutorial.crud.resource.usersubscription.SaveUserSubscriptionResource;
 import com.tutorial.crud.resource.usersubscription.UserSubscriptionResource;
 import com.tutorial.crud.service.UserSubscriptionService;
