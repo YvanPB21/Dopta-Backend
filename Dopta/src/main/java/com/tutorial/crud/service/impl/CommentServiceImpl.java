@@ -4,6 +4,7 @@ import com.tutorial.crud.exception.ResourceNotFoundException;
 import com.tutorial.crud.model.AdoptionProcess;
 import com.tutorial.crud.model.Comment;
 import com.tutorial.crud.repository.CommentRepository;
+import com.tutorial.crud.repository.PersonRepository;
 import com.tutorial.crud.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -24,6 +25,9 @@ public class CommentServiceImpl implements CommentService {
     @Autowired
     private CommentRepository commentRepository;
 
+    @Autowired
+    private PersonRepository personRepository;
+
     @Override
     public Page<Comment> getAllCommentsByAdoptionProcessId(Integer adoptionProcessId, Pageable pageable) {
         return commentRepository.findByAdoptionProcessId(adoptionProcessId, pageable);
@@ -39,23 +43,24 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public Comment createComment(Integer adoptionProcessId, Comment comment) {
-        return adoptionProcessRepository.findById(adoptionProcessId).map(post -> {
-            comment.setAdoptionProcess(post);
-            return commentRepository.save(comment);
-        }).orElseThrow(() -> new ResourceNotFoundException(
-                "AdoptionProcess", "Id", adoptionProcessId
-        ));
+    public Comment createComment(Integer adoptionProcessId, Integer posterId, Comment comment) {
+        Comment newComment = new Comment();
+        newComment.setContent(comment.getContent());
+        newComment.setDate(comment.getDate());
+        newComment.setAdoptionProcess(adoptionProcessRepository.findById(adoptionProcessId).orElse(null));
+        newComment.setPoster(personRepository.findById(posterId).orElse(null));
+
+        return commentRepository.save(newComment);
     }
 
     @Override
     public Comment updateComment(Integer adoptionProcessId, Integer commentId, Comment commentDetails) {
         if(!adoptionProcessRepository.existsById(adoptionProcessId))
-            throw new ResourceNotFoundException("Adoption Process", "Id", adoptionProcessId);
-        return commentRepository.findById(commentId).map(comment -> {
-            comment.setContent(commentDetails.getContent());
-            return commentRepository.save(comment)
-        }).orElseThrow(() -> new ResourceNotFoundException("Comment", "Id", commentId));
+            throw new ResourceNotFoundException("AdoptionProcess","Id",adoptionProcessId);
+        return commentRepository.findById(commentId).map(com->{
+            com.setContent(commentDetails.getContent());
+            com.setDate(commentDetails.getDate());
+        }).orElseThrow(()-> new ResourceNotFoundException("Comment","Id",commentId));
     }
 
     @Override

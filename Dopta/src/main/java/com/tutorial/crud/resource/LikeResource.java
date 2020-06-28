@@ -1,4 +1,7 @@
 package com.tutorial.crud.resource;
 
-public class LikeResource {
+import com.tutorial.crud.model.AuditModel;
+
+public class LikeResource extends AuditModel {
+    private Integer id;
 }

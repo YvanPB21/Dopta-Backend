@@ -12,7 +12,7 @@ import java.util.Optional;
 public interface CommentService {
     Page<Comment> getAllCommentsByAdoptionProcessId(Integer adoptionProcessId, Pageable pageable);
     Comment getCommentByIdAndAdoptionProcessId(Integer adoptionProcessId, Integer commentId);
-    Comment createComment(Integer adoptionProcessId, Comment comment);
+    Comment createComment(Integer adoptionProcessId, Integer posterId, Comment comment);
     Comment updateComment(Integer adoptionProcessId, Integer commentId, Comment commentDetails);
     ResponseEntity<?> deleteComment(Integer adoptionProcessId, Integer commentId);
 }
