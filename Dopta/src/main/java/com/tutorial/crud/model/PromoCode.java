@@ -26,7 +26,7 @@ public class PromoCode {
     @NotNull
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="promo_id")
-    private Promo promo;
+    private com.tutorial.crud.entity.Promo promo;
 
     @NotNull
     @ManyToOne(fetch = FetchType.EAGER)

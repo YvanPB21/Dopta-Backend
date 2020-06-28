@@ -6,6 +6,6 @@ import lombok.Setter;
 
 @Getter @Setter
 public class CorporationResource extends AuditModel {
-    private String name;
+    private String corporationName;
     private Integer ruc;
 }

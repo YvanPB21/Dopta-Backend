@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter @Setter
 public class SaveCorporationResource {
     @NotNull
-    private String name;
+    private String corporationName;
     @NotNull
     private Integer ruc;
 }

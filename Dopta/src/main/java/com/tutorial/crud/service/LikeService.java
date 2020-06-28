@@ -11,6 +11,6 @@ import java.util.List;
 public interface LikeService {
     Page<Like> getAllLikesByAdoptionProcessId(Integer adoptionProcessId, Pageable pageable);
     Like getLikeByIdAndAdoptionProcessId(Integer adoptionProcessId, Integer likeId);
-    Like createLike(Integer adoptionProcessId, Like like);
+    Like createLike(Integer adoptionProcessId, Integer likerId, Like like);
     ResponseEntity<?> deleteLike(Integer adoptionProcessId, Integer likeId);
 }

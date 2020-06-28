@@ -1,8 +1,8 @@
 package com.tutorial.crud.service.impl;
 
 import com.tutorial.crud.exception.ResourceNotFoundException;
-import com.tutorial.crud.model.AdoptionProcess;
 import com.tutorial.crud.model.Comment;
+import com.tutorial.crud.repository.AdoptionProcessRepository;
 import com.tutorial.crud.repository.CommentRepository;
 import com.tutorial.crud.repository.PersonRepository;
 import com.tutorial.crud.service.CommentService;
@@ -13,8 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.List;
-import java.util.Optional;
+
 
 @Service
 public class CommentServiceImpl implements CommentService {
@@ -43,6 +42,7 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
+    @Transactional
     public Comment createComment(Integer adoptionProcessId, Integer posterId, Comment comment) {
         Comment newComment = new Comment();
         newComment.setContent(comment.getContent());
@@ -54,20 +54,24 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
+    @Transactional
     public Comment updateComment(Integer adoptionProcessId, Integer commentId, Comment commentDetails) {
         if(!adoptionProcessRepository.existsById(adoptionProcessId))
             throw new ResourceNotFoundException("AdoptionProcess","Id",adoptionProcessId);
         return commentRepository.findById(commentId).map(com->{
             com.setContent(commentDetails.getContent());
             com.setDate(commentDetails.getDate());
+            return commentRepository.save(com);
         }).orElseThrow(()-> new ResourceNotFoundException("Comment","Id",commentId));
+
     }
 
     @Override
+    @Transactional
     public ResponseEntity<?> deleteComment(Integer adoptionProcessId, Integer commentId) {
         return commentRepository.findByIdAndAdoptionProcessId(commentId, adoptionProcessId).map(comment -> {
             commentRepository.delete(comment);
-            return ResponseEntity.ok().body();
+            return ResponseEntity.ok().build();
         }).orElseThrow(() -> new ResourceNotFoundException(
                 "Comment not found with Id" + commentId + " and AdoptionProcessId " + adoptionProcessId
         ));

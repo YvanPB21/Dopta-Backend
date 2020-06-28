@@ -1,55 +1,70 @@
 package com.tutorial.crud.controller;
 
 import com.tutorial.crud.model.Person;
-import com.tutorial.crud.model.User;
+import com.tutorial.crud.resource.SavePersonResource;
+import com.tutorial.crud.resource.PersonResource;
 import com.tutorial.crud.service.PersonService;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
+import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/persons")
+@RequestMapping("/api")
 public class PersonController {
+    @Autowired
+    private ModelMapper mapper;
     @Autowired
     private PersonService personService;
 
-    @GetMapping
-    public ResponseEntity<List<Person>> listPerson(){
-        List<Person> persons = new ArrayList<>();
-        persons=personService.listAllPerson();
-        return ResponseEntity.ok(persons);
+    @GetMapping("/persons")
+    public Page<PersonResource> getAllPersons(Pageable pageable){
+        List<PersonResource> personResources = personService.getAllPersons(pageable)
+                .getContent().stream().map(this::convertToResource).collect(Collectors.toList());
+        return new PageImpl<>(personResources,pageable,personResources.size());
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<User> getById(@PathVariable Integer id){
-        Person person = personService.getPerson(id);
-        if(person==null)
-            return ResponseEntity.notFound().build();
-        else
-            return (ResponseEntity.ok(person));
+    @GetMapping("/persons/{userId}")
+    public PersonResource getPersonByUserId(@PathVariable(name = "userId") Integer userId){
+        return convertToResource(personService.getPersonByUserId(userId));
     }
 
-    @PostMapping
-    public ResponseEntity<Person> newPerson(@RequestBody Person person){
-        return ResponseEntity.status(HttpStatus.CREATED).body(personService.save(person));
+    @PostMapping("/persons/{userId}/{ratingId}/{genderId}")
+    public PersonResource createPerson(@PathVariable(name = "userId") Integer userId,
+                                       @PathVariable(name = "ratingId") Integer ratingId,
+                                       @PathVariable(name = "genderId") Integer genderId,
+                                       @Valid @RequestBody SavePersonResource resource){
+        return convertToResource(personService.createPerson(ratingId, genderId, userId, convertToEntity(resource)));
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Person> updatePerson(@RequestBody Person person, @PathVariable Integer id){
-        return ResponseEntity.status(HttpStatus.OK).body(personService.edit(person,id));
+    @PutMapping("/persons/{userId}/{ratingId}/{genderId}")
+    public PersonResource updatePerson(@PathVariable(name = "userId") Integer userId,
+                                                 @PathVariable(name = "ratingId") Integer ratingId,
+                                                 @PathVariable(name = "genderId") Integer genderId,
+                                                 @Valid @RequestBody SavePersonResource resource){
+        return convertToResource(personService.updatePerson(userId, ratingId, genderId, convertToEntity(resource)));
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Person> deletePerson(@PathVariable Integer id){
-        personService.deleteById(id);
-        return ResponseEntity.noContent().build();
+    @DeleteMapping("/persons/{userId}")
+    public ResponseEntity<?> deletePerson(@PathVariable(name = "userId") Integer userId){
+        return personService.deletePerson(userId);
     }
 
+    private Person convertToEntity(SavePersonResource resource) {
+        return mapper.map(resource, Person.class);
+    }
 
+    private PersonResource convertToResource(Person entity) {
+        return mapper.map(entity, PersonResource.class);
+    }
+    
 }

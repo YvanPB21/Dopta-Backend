@@ -1,15 +1,17 @@
 package com.tutorial.crud.service;
 
 import com.tutorial.crud.model.Person;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface PersonService {
-    Person getPerson(Integer id);
-    Person save(Person person);
-    Optional<Person> findById(Integer id);
-    List<Person> listAllPerson();
-    Person edit(Person person, Integer id);
-    void deleteById(Integer id);
+    Person getPersonByUserId(Integer userId);
+    Page<Person> getAllPersons(Pageable pageable);
+    Person createPerson(Integer ratingId, Integer genderId, Integer userId, Person person);
+    Person updatePerson(Integer personId, Integer ratingId, Integer genderId, Person personDetails);
+    ResponseEntity<?> deletePerson(Integer personId);
 }

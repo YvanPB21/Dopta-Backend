@@ -3,7 +3,9 @@ package com.tutorial.crud.service.impl;
 import com.tutorial.crud.exception.ResourceNotFoundException;
 import com.tutorial.crud.model.AdoptionProcess;
 import com.tutorial.crud.model.Like;
+import com.tutorial.crud.repository.AdoptionProcessRepository;
 import com.tutorial.crud.repository.LikeRepository;
+import com.tutorial.crud.repository.PersonRepository;
 import com.tutorial.crud.service.LikeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -23,6 +25,9 @@ public class LikeServiceImpl implements LikeService {
     @Autowired
     private LikeRepository likeRepository;
 
+    @Autowired
+    private PersonRepository personRepository;
+
     @Override
     public Page<Like> getAllLikesByAdoptionProcessId(Integer adoptionProcessId, org.springframework.data.domain.Pageable pageable) {
         return likeRepository.findByAdoptionProcessId(adoptionProcessId, pageable);
@@ -38,17 +43,23 @@ public class LikeServiceImpl implements LikeService {
     }
 
     @Override
-    public Like createLike(Integer adoptionProcessId, Like like) {
-        return adoptionProcessRepository.findById(adoptionProcessId).map(post -> {
-            like.setAdoptionProcess(post);
-            return likeRepository.save(like);
-        }).orElseThrow(() -> new ResourceNotFoundException(
-                "AdoptionProcess", "Id", adoptionProcessId
-        ));
+    @Transactional
+    public Like createLike(Integer adoptionProcessId, Integer likerId, Like like) {
+        Like newLike = new Like();
+        newLike.setLiker(personRepository.findById(likerId).orElse(null));
+        newLike.setAdoptionProcess(adoptionProcessRepository.findById(adoptionProcessId).orElse(null));
+
+        return likeRepository.save(newLike);
     }
 
     @Override
+    @Transactional
     public ResponseEntity<?> deleteLike(Integer adoptionProcessId, Integer likeId) {
-        return null;
+        return likeRepository.findByIdAndAdoptionProcessId(likeId, adoptionProcessId).map(comment -> {
+            likeRepository.delete(comment);
+            return ResponseEntity.ok().build();
+        }).orElseThrow(() -> new ResourceNotFoundException(
+                "Comment not found with Id" + likeId + " and AdoptionProcessId " + adoptionProcessId
+        ));
     }
 }

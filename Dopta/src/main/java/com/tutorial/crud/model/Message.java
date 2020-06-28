@@ -39,6 +39,6 @@ public class Message {
     @Null
     private String recording_url;
 
-    @NotNull
+    @Null
     private String video_url;
 }

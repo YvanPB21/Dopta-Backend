@@ -3,6 +3,8 @@ package com.tutorial.crud.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 
@@ -23,5 +25,6 @@ public class UserProfile extends User {
     private Locatable locatable;
     @OneToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="user_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
 }

@@ -44,10 +44,11 @@ public class CommentController {
         return convertToResource(commentService.getCommentByIdAndAdoptionProcessId(postId, commentId));
     }
 
-    @PostMapping("/posts/{postId}/comments")
+    @PostMapping("/posts/{postId}/comments/{posterId}")
     public CommentResource createComment(@PathVariable(name = "postId") Integer postId,
+                                         @PathVariable(name = "posterId") Integer posterId,
                                          @Valid @RequestBody SaveCommentResource resource) {
-        return convertToResource(commentService.createComment(postId, convertToEntity(resource)));
+        return convertToResource(commentService.createComment(postId, posterId, convertToEntity(resource)));
     }
 
     @PutMapping("/posts/{postId}/comments/{commentId}")

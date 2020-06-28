@@ -25,12 +25,12 @@ public class Pet {
     @NotNull
     @ManyToOne
     @JoinColumn(name="size_id")
-    private Size size;
+    private com.tutorial.crud.model.Size size;
 
     @NotNull
     @ManyToOne
     @JoinColumn(name="species_id")
-    private Species species;
+    private com.tutorial.crud.model.Species species;
 
     @NotNull
     @ManyToOne

@@ -13,5 +13,4 @@ public class PersonResource extends AuditModel {
     private String last_names;
     private Integer dni;
     private java.util.Date date_of_birth;
-    private Float rating;
 }

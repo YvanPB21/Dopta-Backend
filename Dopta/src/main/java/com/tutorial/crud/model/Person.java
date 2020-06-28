@@ -3,6 +3,8 @@ package com.tutorial.crud.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 
@@ -18,11 +20,12 @@ public class Person extends User{
 
     private Integer dni;
 
-
     @Temporal(TemporalType.TIMESTAMP)
     private java.util.Date date_of_birth;
 
-    private Float rating;
+    @OneToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name="rating_id")
+    private Rating rating;
 
     @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="gender_id")
@@ -30,5 +33,6 @@ public class Person extends User{
 
     @OneToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="user_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
 }
