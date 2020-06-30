@@ -23,6 +23,7 @@ import java.util.stream.Collectors;
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/api")
 public class SubscriptionPlanController {
     @Autowired
     private ModelMapper mapper;

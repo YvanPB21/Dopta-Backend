@@ -9,12 +9,15 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@CrossOrigin(origins = "http://localhost:4200")
+@RestController
+@RequiredArgsConstructor
+@RequestMapping("/api")
 public class ProvinceController {
     @Autowired
     private ProvinceService provinceService;
 
-    @GetMapping("{id}")
+    @GetMapping("/province/{id}")
     public ResponseEntity<Province> getById(@PathVariable Integer id) {
         Province province = provinceService.getProvince(id);
         if (province == null)
@@ -23,7 +26,7 @@ public class ProvinceController {
             return (ResponseEntity.ok(province));
     }
 
-    @GetMapping
+    @GetMapping("/province")
     public ResponseEntity<List<Province>> listProvince() {
         List<Province> provinces = new ArrayList<>();
         provinces = provinceService.listAllProvince();
@@ -33,17 +36,17 @@ public class ProvinceController {
         return ResponseEntity.ok(provinces);
     }
 
-    @PostMapping
+    @PostMapping("/province")
     public ResponseEntity<Province> newProvince(@RequestBody Province province) {
         return ResponseEntity.status(HttpStatus.CREATED).body(provinceService.save(province));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/province/{id}")
     public ResponseEntity<Province> updateProvince(@RequestBody Province province, @PathVariable Integer id) {
         return ResponseEntity.status(HttpStatus.OK).body(provinceService.edit(province, id));
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/province/{id}")
     public ResponseEntity<Province> deleteProvince(@PathVariable Integer id) {
         provinceService.deleteById(id);
         return ResponseEntity.noContent().build();
