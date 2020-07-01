@@ -31,10 +31,10 @@ public class SizeController {
 
     @Operation(summary = "Get Sizes", description = "Get all sizes by Pages", tags = {"sizes"})
     @GetMapping("/sizes")
-    public Page<SizeResource> getAllSize(@Parameter(description = "Pageable parameter") Pageable pageable) {
+    public List<SizeResource> getAllSize(@Parameter(description = "Pageable parameter") Pageable pageable) {
         Page<Size> sizePage = sizeService.getAllSizes(pageable);
         List<SizeResource> resources = sizePage.getContent().stream().map(this::convertToResource).collect(Collectors.toList());
-        return new PageImpl<>(resources, pageable, resources.size());
+        return resources;
     }
 
     @Operation(summary = "Get Size by Id", description = "Get a size by specifying Id", tags = {"sizes"})
