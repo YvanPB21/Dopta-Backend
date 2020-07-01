@@ -28,10 +28,10 @@ public class PersonController {
     private PersonService personService;
 
     @GetMapping("/persons")
-    public Page<PersonResource> getAllPersons(Pageable pageable) {
+    public List<PersonResource> getAllPersons(Pageable pageable) {
         List<PersonResource> personResources = personService.getAllPersons(pageable)
                 .getContent().stream().map(this::convertToResource).collect(Collectors.toList());
-        return new PageImpl<>(personResources, pageable, personResources.size());
+        return personResources;
     }
 
     @GetMapping("/persons/{userId}")

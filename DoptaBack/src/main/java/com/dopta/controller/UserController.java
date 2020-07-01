@@ -30,10 +30,10 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/users")
-    public Page<UserResource> getAllUsers(Pageable pageable) {
+    public List<UserResource> getAllUsers(Pageable pageable) {
         List<UserResource> users = userService.getAllUsers(pageable)
                 .getContent().stream().map(this::convertToResource).collect(Collectors.toList());
-        return new PageImpl<>(users, pageable, users.size());
+        return users;
     }
 
     @GetMapping("/users/{id}")

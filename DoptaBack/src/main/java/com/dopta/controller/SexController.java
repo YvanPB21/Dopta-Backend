@@ -30,10 +30,10 @@ public class SexController {
 
     @Operation(summary = "Get Sexes", description = "Get all sexes by Pages", tags = {"sexes"})
     @GetMapping("/sexes")
-    public Page<SexResource> getAllSexes(@Parameter(description = "Pageable parameter") Pageable pageable) {
+    public List<SexResource> getAllSexes(@Parameter(description = "Pageable parameter") Pageable pageable) {
         Page<Sex> sexPage = sexService.getAllSexes(pageable);
         List<SexResource> resources = sexPage.getContent().stream().map(this::convertToResource).collect(Collectors.toList());
-        return new PageImpl<>(resources, pageable, resources.size());
+        return resources;
     }
 
     @Operation(summary = "Get Sex by Id", description = "Get a sex by specifying Id", tags = {"sexes"})

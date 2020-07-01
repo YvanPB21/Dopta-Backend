@@ -29,10 +29,10 @@ public class UserProfileController {
     private UserProfileService userProfileService;
 
     @GetMapping("/userProfiles")
-    public Page<UserProfileResource> getAllUserProfiles(Pageable pageable) {
-        List<UserProfileResource> userProfileResources = userProfileService.getAllUserProfiles(pageable)
+    public List<UserProfileResource> getAllUserProfiles(Pageable pageable) {
+        List<UserProfileResource> resources = userProfileService.getAllUserProfiles(pageable)
                 .getContent().stream().map(this::convertToResource).collect(Collectors.toList());
-        return new PageImpl<>(userProfileResources, pageable, userProfileResources.size());
+        return resources;
     }
 
     @GetMapping("/userProfiles/{userId}")

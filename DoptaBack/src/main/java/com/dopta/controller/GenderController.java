@@ -29,10 +29,10 @@ public class GenderController {
     private GenderService genderService;
 
     @GetMapping("/genders")
-    public Page<GenderResource> getAllGenders(Pageable pageable) {
+    public List<GenderResource> getAllGenders(Pageable pageable) {
         List<GenderResource> genderResources = genderService.getAllGenders(pageable)
                 .getContent().stream().map(this::convertToResource).collect(Collectors.toList());
-        return new PageImpl<>(genderResources, pageable, genderResources.size());
+        return genderResources;
     }
 
     @GetMapping("/genders/{genderId}")

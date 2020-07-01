@@ -30,10 +30,10 @@ public class PetController {
 
     @Operation(summary = "Get Pets", description = "Get all pets by Pages", tags = {"pets"})
     @GetMapping("/pets")
-    public Page<PetResource> getAllPets(@Parameter(description = "Pageable parameter") Pageable pageable) {
+    public List<PetResource> getAllPets(@Parameter(description = "Pageable parameter") Pageable pageable) {
         Page<Pet> petPage = petService.getAllPets(pageable);
         List<PetResource> resources = petPage.getContent().stream().map(this::convertToResource).collect(Collectors.toList());
-        return new PageImpl<>(resources, pageable, resources.size());
+        return resources;
     }
 
     @Operation(summary = "Get Pet by Id", description = "Get a pet by specifying Id", tags = {"pets"})
@@ -46,71 +46,71 @@ public class PetController {
 
     @Operation(summary = "Get Pets by sex Id", description = "Get pets by specifying Sex Id", tags = {"pets"})
     @GetMapping("/pets/sex/{sexId}")
-    public Page<PetResource> getPetsBySexId(
+    public List<PetResource> getPetsBySexId(
             @Parameter(description = "Pageable parameter") Pageable pageable,
             @Parameter(description = "Sex Id")
             @PathVariable(name = "sexId") Integer sexId) {
         Page<Pet> petPage = petService.getPetsBySexId(sexId, pageable);
         List<PetResource> resources = petPage.getContent().stream().map(this::convertToResource).collect(Collectors.toList());
-        return new PageImpl<>(resources, pageable, resources.size());
+        return resources;
     }
 
     @Operation(summary = "Get Pets by size Id", description = "Get pets by specifying Size Id", tags = {"pets"})
     @GetMapping("/pets/size/{sizeId}")
-    public Page<PetResource> getPetsBySizeId(
+    public List<PetResource> getPetsBySizeId(
             @Parameter(description = "Pageable parameter") Pageable pageable,
             @Parameter(description = "Size Id")
             @PathVariable(name = "sizeId") Integer sizeId) {
         Page<Pet> petPage = petService.getPetsBySizeId(sizeId, pageable);
         List<PetResource> resources = petPage.getContent().stream().map(this::convertToResource).collect(Collectors.toList());
-        return new PageImpl<>(resources, pageable, resources.size());
+        return resources;
     }
 
     @Operation(summary = "Get Pets by species Id", description = "Get pets by specifying Species Id", tags = {"pets"})
     @GetMapping("/pets/species/{speciesId}")
-    public Page<PetResource> getPetsBySpeciesId(
+    public List<PetResource> getPetsBySpeciesId(
             @Parameter(description = "Pageable parameter") Pageable pageable,
             @Parameter(description = "Species Id")
             @PathVariable(name = "speciesId") Integer speciesId) {
         Page<Pet> petPage = petService.getPetsBySpeciesId(speciesId, pageable);
         List<PetResource> resources = petPage.getContent().stream().map(this::convertToResource).collect(Collectors.toList());
-        return new PageImpl<>(resources, pageable, resources.size());
+        return resources;
     }
 
     @Operation(summary = "Get Pets by size Id and sex Id", description = "Get pets by specifying Size Id and Sex Id", tags = {"pets"})
     @GetMapping(value = {"/pets/size/{sizeId}/sex/{sexId}", "/pets/sex/{sexId}/size/{sizeId}"})
-    public Page<PetResource> getPetsBySizeIdAndSexId(
+    public List<PetResource> getPetsBySizeIdAndSexId(
             @Parameter(description = "Pageable parameter") Pageable pageable,
             @Parameter(description = "Size Id") @PathVariable(name = "sizeId") Integer sizeId,
             @Parameter(description = "Sex Id") @PathVariable(name = "sexId") Integer sexId
     ) {
         Page<Pet> petPage = petService.getPetsBySizeIdAndSexId(sizeId, sexId, pageable);
         List<PetResource> resources = petPage.getContent().stream().map(this::convertToResource).collect(Collectors.toList());
-        return new PageImpl<>(resources, pageable, resources.size());
+        return resources;
     }
 
     @Operation(summary = "Get Pets by species Id and sex Id", description = "Get pets by specifying Species Id and Sex Id", tags = {"pets"})
     @GetMapping(value = {"/pets/species/{speciesId}/sex/{sexId}", "/pets/sex/{sexId}/species/{speciesId}"})
-    public Page<PetResource> getPetsBySpeciesIdAndSexId(
+    public List<PetResource> getPetsBySpeciesIdAndSexId(
             @Parameter(description = "Pageable parameter") Pageable pageable,
             @Parameter(description = "Species Id") @PathVariable(name = "speciesId") Integer speciesId,
             @Parameter(description = "Sex Id") @PathVariable(name = "sexId") Integer sexId
     ) {
         Page<Pet> petPage = petService.getPetsBySpeciesIdAndSexId(speciesId, sexId, pageable);
         List<PetResource> resources = petPage.getContent().stream().map(this::convertToResource).collect(Collectors.toList());
-        return new PageImpl<>(resources, pageable, resources.size());
+        return resources;
     }
 
     @Operation(summary = "Get Pets by species Id and size Id", description = "Get pets by specifying Species Id and Size Id", tags = {"pets"})
     @GetMapping(value = {"/pets/species/{speciesId}/size/{sizeId}", "/pets/size/{sizeId}/species/{speciesId}"})
-    public Page<PetResource> getPetsBySpeciesIdAndSizeId(
+    public List<PetResource> getPetsBySpeciesIdAndSizeId(
             @Parameter(description = "Pageable parameter") Pageable pageable,
             @Parameter(description = "Species Id") @PathVariable(name = "speciesId") Integer speciesId,
             @Parameter(description = "Size Id") @PathVariable(name = "sizeId") Integer sizeId
     ) {
         Page<Pet> petPage = petService.getPetsBySpeciesIdAndSizeId(speciesId, sizeId, pageable);
         List<PetResource> resources = petPage.getContent().stream().map(this::convertToResource).collect(Collectors.toList());
-        return new PageImpl<>(resources, pageable, resources.size());
+        return resources;
     }
 
     @PostMapping("/pets")
