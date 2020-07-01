@@ -10,12 +10,15 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@CrossOrigin(origins = "http://localhost:4200")
+@RestController
+@RequiredArgsConstructor
+@RequestMapping("/api")
 public class LocatableController {
     @Autowired
     private LocatableService locatableService;
 
-    @GetMapping("{id}")
+    @GetMapping("/locatable/{id}")
     public ResponseEntity<Locatable> getById(@PathVariable Integer id) {
         Locatable locatable = locatableService.getLocatable(id);
         if (locatable == null)
@@ -24,7 +27,7 @@ public class LocatableController {
             return (ResponseEntity.ok(locatable));
     }
 
-    @GetMapping
+    @GetMapping("/locatable")
     public ResponseEntity<List<Locatable>> listLocatable() {
         List<Locatable> locatables = new ArrayList<>();
         locatables = locatableService.listAllLocatable();
@@ -34,17 +37,17 @@ public class LocatableController {
         return ResponseEntity.ok(locatables);
     }
 
-    @PostMapping
+    @PostMapping("/locatable")
     public ResponseEntity<Locatable> newLocatable(@RequestBody Locatable locatable) {
         return ResponseEntity.status(HttpStatus.CREATED).body(locatableService.save(locatable));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/locatable/{id}")
     public ResponseEntity<Locatable> updateLocatable(@RequestBody Locatable locatable, @PathVariable Integer id) {
         return ResponseEntity.status(HttpStatus.OK).body(locatableService.edit(locatable, id));
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/locatable/{id}")
     public ResponseEntity<Locatable> deleteLocatable(@PathVariable Integer id) {
         locatableService.deleteById(id);
         return ResponseEntity.noContent().build();
