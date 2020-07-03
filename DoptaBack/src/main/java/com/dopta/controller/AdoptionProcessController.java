@@ -52,6 +52,13 @@ public class AdoptionProcessController {
         List<AdoptionProcessResource> resources = adoptionProcessPage.getContent().stream().map(this::convertToResource).collect(Collectors.toList());
         return resources;
     }
+    @Operation(summary = "Get Adoptions by Poster Id", description = "Get adoptions by specyfing the Id of the associated Posters", tags = {"adoptions"})
+    @GetMapping("/adoptions/{posterId}/posters")
+    public List<AdoptionProcessResource> getAllAdoptionProcessesByPosterId(@PathVariable(name = "posterId") Integer posterId, Pageable pageable) {
+        Page<AdoptionProcess> adoptionProcessPage = adoptionProcessService.getAdoptionProcessByPosterId(posterId, pageable);
+        List<AdoptionProcessResource> resources = adoptionProcessPage.getContent().stream().map(this::convertToResource).collect(Collectors.toList());
+        return resources;
+    }
 
     @PostMapping("/adoptions")
     public AdoptionProcessResource createAdoptionProcess(@Valid @RequestBody SaveAdoptionProcessResource resource, Integer petId, Integer posterId, Integer adopterId) {

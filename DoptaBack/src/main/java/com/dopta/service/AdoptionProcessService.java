@@ -11,6 +11,8 @@ public interface AdoptionProcessService {
 
     Page<AdoptionProcess> getAdoptionProcessByPetId(Integer petId, Pageable pageable);
 
+    Page<AdoptionProcess> getAdoptionProcessByPosterId(Integer petId, Pageable pageable);
+
     Page<AdoptionProcess> getAdoptionProcessByPet(Pet pet, Pageable pageable);
 
     Page<AdoptionProcess> getAllAdoptionProcesses(Pageable pageable);
