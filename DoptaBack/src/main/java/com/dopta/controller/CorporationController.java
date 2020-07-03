@@ -36,19 +36,23 @@ public class CorporationController {
 
     @GetMapping("/corporations/{userId}")
     public CorporationResource getCorporationByUserId(@PathVariable(name = "userId") Integer userId) {
-        return convertToResource(corporationService.getCorporationByUserId(userId));
+        return convertToResource(corporationService.getCorporationById(userId));
     }
 
-    @PostMapping("/corporations/{userId}")
+    @PostMapping("/corporations/{userId}/{districtId}/{locatableId}")
     public CorporationResource createCorporation(@PathVariable(name = "userId") Integer userId,
+                                                 @PathVariable(name = "districtId") Integer districtId,
+                                                 @PathVariable(name = "locatableId") Integer locatableId,
                                                  @Valid @RequestBody SaveCorporationResource resource) {
-        return convertToResource(corporationService.createCorporation(userId, convertToEntity(resource)));
+        return convertToResource(corporationService.createCorporation(convertToEntity(resource), districtId, locatableId));
     }
 
     @PutMapping("/corporations/{userId}")
     public CorporationResource updateCorporation(@PathVariable(name = "userId") Integer userId,
+                                                 @PathVariable(name = "districtId") Integer districtId,
+                                                 @PathVariable(name = "locatableId") Integer locatableId,
                                                  @Valid @RequestBody SaveCorporationResource resource) {
-        return convertToResource(corporationService.updateCorporation(userId, convertToEntity(resource)));
+        return convertToResource(corporationService.updateCorporation(userId, districtId, locatableId, convertToEntity(resource)));
     }
 
     @DeleteMapping("/corporations/{userId}")

@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="7e7a8664-6ba9-4653-923d-1a575805eaaa" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="JavaFXApplication" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="1cxtHpwth9vD9Zh1GmAXmI9mMe7" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="mysql" />
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java/com/tutorial/crud/resource" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.tutorial.crud.repository" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\ivanl\Documents\GitHub\Dopta-Backend\Dopta\src\main\java\com\tutorial\crud\resource" />
+      <recent name="C:\Users\ivanl\Documents\GitHub\Dopta-Backend\Dopta\src\main\java\com\tutorial\crud\repository" />
+      <recent name="C:\Users\ivanl\Documents\GitHub\Dopta-Backend\Dopta\src\main\java\com\tutorial\crud\model" />
+      <recent name="C:\Users\ivanl\Documents\GitHub\Dopta-Backend\Dopta\src\main\java\com\tutorial\crud\service\impl" />
+      <recent name="C:\Users\ivanl\Documents\GitHub\Dopta-Backend\Dopta\src\main\java\com\tutorial\crud\service" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Spring Boot.ApiApplication">
+    <configuration name="ApiApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="api" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.dopta.ApiApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CrudApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="api" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.tutorial.crud.CrudApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7e7a8664-6ba9-4653-923d-1a575805eaaa" name="Default Changelist" comment="" />
+      <created>1591481986804</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1591481986804</updated>
+      <workItem from="1591482003523" duration="886000" />
+      <workItem from="1591482908942" duration="1588000" />
+      <workItem from="1591484735789" duration="10469000" />
+      <workItem from="1591560342139" duration="7191000" />
+      <workItem from="1591574226853" duration="910000" />
+      <workItem from="1592279823590" duration="11189000" />
+      <workItem from="1592297365621" duration="22000" />
+      <workItem from="1592451792311" duration="62000" />
+      <workItem from="1592689936064" duration="1937000" />
+      <workItem from="1592981698716" duration="36000" />
+      <workItem from="1593048103846" duration="990000" />
+      <workItem from="1593062031703" duration="590000" />
+      <workItem from="1593115040610" duration="585000" />
+      <workItem from="1593135357726" duration="593000" />
+      <workItem from="1593136012308" duration="15000" />
+      <workItem from="1593136046627" duration="75000" />
+      <workItem from="1593138565454" duration="17019000" />
+      <workItem from="1593217020080" duration="4250000" />
+      <workItem from="1593226948664" duration="12313000" />
+      <workItem from="1593298880082" duration="9330000" />
+      <workItem from="1593309108327" duration="30727000" />
+      <workItem from="1593341348784" duration="45000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="177" y="51" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1591566289795">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="177" y="51" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1591566289795" />
+    <state x="574" y="119" key="#com.intellij.ide.util.MemberChooser" timestamp="1593337664585">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="574" y="119" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1593337664585" />
+    <state x="0" y="340" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1593331263813">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="0" y="340" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/0.0.1536.824@0.0.1536.824" timestamp="1593331263813" />
+    <state x="551" y="281" width="433" height="267" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1593159680711">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="551" y="281" width="433" height="267" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1536.824@0.0.1536.824" timestamp="1593159680711" />
+    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1593341178470">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1593341178470" />
+    <state x="165" y="170" key="FileChooserDialogImpl" timestamp="1593298902267">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="165" y="170" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1593298902267" />
+    <state width="1265" height="210" key="GridCell.Tab.0.bottom" timestamp="1591580473264">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1265" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1591580473264" />
+    <state width="1265" height="210" key="GridCell.Tab.0.center" timestamp="1591580473264">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1265" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1591580473264" />
+    <state width="1265" height="210" key="GridCell.Tab.0.left" timestamp="1591580473263">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1265" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1591580473263" />
+    <state width="1265" height="210" key="GridCell.Tab.0.right" timestamp="1591580473264">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1265" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1591580473264" />
+    <state width="1265" height="210" key="GridCell.Tab.1.bottom" timestamp="1591580473264">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1265" height="210" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1591580473264" />
+    <state width="1265" height="210" key="GridCell.Tab.1.center" timestamp="1591580473264">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1265" height="210" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1591580473264" />
+    <state width="1265" height="210" key="GridCell.Tab.1.left" timestamp="1591580473264">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1265" height="210" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1591580473264" />
+    <state width="1265" height="210" key="GridCell.Tab.1.right" timestamp="1591580473264">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1265" height="210" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1591580473264" />
+    <state x="0" y="0" key="SettingsEditor" timestamp="1593332554938">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="0" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1593332554938" />
+    <state x="47" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1593328114838">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="47" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1593328114838" />
+  </component>
+</project>

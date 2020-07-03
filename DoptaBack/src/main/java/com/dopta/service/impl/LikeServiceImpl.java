@@ -4,7 +4,7 @@ import com.dopta.exception.ResourceNotFoundException;
 import com.dopta.model.Like;
 import com.dopta.repository.AdoptionProcessRepository;
 import com.dopta.repository.LikeRepository;
-import com.dopta.repository.PersonRepository;
+import com.dopta.repository.UserRepository;
 import com.dopta.service.LikeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -23,7 +23,7 @@ public class LikeServiceImpl implements LikeService {
     private LikeRepository likeRepository;
 
     @Autowired
-    private PersonRepository personRepository;
+    private UserRepository userRepository;
 
     @Override
     public Page<Like> getAllLikesByAdoptionProcessId(Integer adoptionProcessId, org.springframework.data.domain.Pageable pageable) {
@@ -43,7 +43,7 @@ public class LikeServiceImpl implements LikeService {
     @Transactional
     public Like createLike(Integer adoptionProcessId, Integer likerId, Like like) {
         Like newLike = new Like();
-        newLike.setLiker(personRepository.findById(likerId).orElse(null));
+        newLike.setLiker(userRepository.findById(likerId).orElse(null));
         newLike.setAdoptionProcess(adoptionProcessRepository.findById(adoptionProcessId).orElse(null));
 
         return likeRepository.save(newLike);

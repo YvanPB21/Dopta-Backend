@@ -4,8 +4,8 @@ import com.dopta.exception.ResourceNotFoundException;
 import com.dopta.model.AdoptionProcess;
 import com.dopta.model.Pet;
 import com.dopta.repository.AdoptionProcessRepository;
-import com.dopta.repository.PersonRepository;
 import com.dopta.repository.PetRepository;
+import com.dopta.repository.UserRepository;
 import com.dopta.service.AdoptionProcessService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -25,7 +25,7 @@ public class AdoptionProcessServiceImpl implements AdoptionProcessService {
     private PetRepository petRepository;
 
     @Autowired
-    private PersonRepository personRepository;
+    private UserRepository userRepository;
 
     @Override
     public AdoptionProcess getAdoptionProcessById(Integer id) {
@@ -55,8 +55,8 @@ public class AdoptionProcessServiceImpl implements AdoptionProcessService {
         newProcess.setDate_published(adoptionProcess.getDate_published());
         newProcess.setDate_adopted(adoptionProcess.getDate_adopted());
         newProcess.setDescription(adoptionProcess.getDescription());
-        newProcess.setAdopter(personRepository.findById(adopterId).orElseThrow(() -> new ResourceNotFoundException("Adopter", "Id", adopterId)));
-        newProcess.setPoster(personRepository.findById(posterId).orElseThrow(() -> new ResourceNotFoundException("Poster", "Id", posterId)));
+        newProcess.setAdopter(userRepository.findById(adopterId).orElseThrow(() -> new ResourceNotFoundException("Adopter", "Id", adopterId)));
+        newProcess.setPoster(userRepository.findById(posterId).orElseThrow(() -> new ResourceNotFoundException("Poster", "Id", posterId)));
 
         return adoptionProcessRepository.save(newProcess);
     }
@@ -68,17 +68,17 @@ public class AdoptionProcessServiceImpl implements AdoptionProcessService {
     public AdoptionProcess editAdoptionProcess(AdoptionProcess adoptionProcessRequest, Integer adoptionProcessId, Integer petId, Integer posterId, Integer adopterId) {
         if (!petRepository.existsById(petId))
             throw new ResourceNotFoundException("Pet", "Id", petId);
-        if (!personRepository.existsById(posterId))
+        if (!userRepository.existsById(posterId))
             throw new ResourceNotFoundException("Poster", "Id", posterId);
-        if (!personRepository.existsById(adopterId))
+        if (!userRepository.existsById(adopterId))
             throw new ResourceNotFoundException("Adopter", "Id", adopterId);
         return adoptionProcessRepository.findById(adoptionProcessId).map(ap -> {
             ap.setPet(petRepository.findById(petId).orElseThrow(() -> new ResourceNotFoundException("Pet", "Id", petId)));
             ap.setDate_published(adoptionProcessRequest.getDate_published());
             ap.setDate_adopted(adoptionProcessRequest.getDate_adopted());
             ap.setDescription(adoptionProcessRequest.getDescription());
-            ap.setAdopter(personRepository.findById(adopterId).orElseThrow(() -> new ResourceNotFoundException("Adopter", "Id", adopterId)));
-            ap.setPoster(personRepository.findById(posterId).orElseThrow(() -> new ResourceNotFoundException("Poster", "Id", posterId)));
+            ap.setAdopter(userRepository.findById(adopterId).orElseThrow(() -> new ResourceNotFoundException("Adopter", "Id", adopterId)));
+            ap.setPoster(userRepository.findById(posterId).orElseThrow(() -> new ResourceNotFoundException("Poster", "Id", posterId)));
             return adoptionProcessRepository.save(ap);
         }).orElseThrow(() -> new ResourceNotFoundException("Adoption Process", "Id", adoptionProcessId));
     }

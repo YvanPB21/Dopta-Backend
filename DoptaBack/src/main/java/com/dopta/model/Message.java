@@ -21,12 +21,12 @@ public class Message {
     @NotNull
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "sender_id")
-    private Person sender;
+    private User sender;
 
     @NotNull
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "receiver_id")
-    private Person receiver;
+    private User receiver;
 
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)

@@ -41,14 +41,20 @@ public class UserController {
         return convertToResource(userService.getUserById(userId));
     }
 
-    @PostMapping("/users")
-    public UserResource createUser(@Valid @RequestBody SaveUserResource resource) {
-        return convertToResource(userService.createUser(convertToEntity(resource)));
+    @PostMapping("/users/{districtId}/{locatableId}/{genderId}")
+    public UserResource createUser(@PathVariable(name = "districtId") Integer districtId,
+                                   @PathVariable(name = "locatableId") Integer locatableId,
+                                   @PathVariable(name = "genderId") Integer genderId,
+                                   @Valid @RequestBody SaveUserResource resource) {
+        return convertToResource(userService.createUser(convertToEntity(resource),districtId,locatableId,genderId));
     }
 
-    @PutMapping("/users/{id}")
-    public UserResource updateUser(@PathVariable(name = "id") Integer userId, @Valid @RequestBody SaveUserResource resource) {
-        return convertToResource(userService.updateUser(userId, convertToEntity(resource)));
+    @PutMapping("/users/{id}/{districtId}/{locatableId}/{genderId}")
+    public UserResource updateUser(@PathVariable(name = "id") Integer userId,
+                                   @PathVariable(name = "districtId") Integer districtId,
+                                   @PathVariable(name = "locatableId") Integer locatableId,
+                                   @PathVariable(name = "genderId") Integer genderId, @Valid @RequestBody SaveUserResource resource) {
+        return convertToResource(userService.updateUser(userId,districtId,locatableId,genderId,convertToEntity(resource)));
     }
 
     @DeleteMapping("/users/{id}")

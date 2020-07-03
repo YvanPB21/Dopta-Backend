@@ -3,7 +3,7 @@ package com.dopta.service.impl;
 import com.dopta.exception.ResourceNotFoundException;
 import com.dopta.model.Message;
 import com.dopta.repository.MessageRepository;
-import com.dopta.repository.PersonRepository;
+import com.dopta.repository.UserRepository;
 import com.dopta.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,7 +18,7 @@ public class MessageServiceImpl implements MessageService {
     @Autowired
     private MessageRepository messageRepository;
     @Autowired
-    private PersonRepository personRepository;
+    private UserRepository userRepository;
 
     @Override
     public Page<Message> getAllMessagesBySenderIdAndReceiverId(Integer senderId, Integer receiverId, Pageable pageable) {
@@ -39,8 +39,8 @@ public class MessageServiceImpl implements MessageService {
         newMessage.setRecording_url(message.getRecording_url());
         newMessage.setVideo_url(message.getVideo_url());
         newMessage.setDate(message.getDate());
-        newMessage.setSender(personRepository.findByUserId(senderId).orElse(null));
-        newMessage.setReceiver(personRepository.findByUserId(receiverId).orElse(null));
+        newMessage.setSender(userRepository.findById(senderId).orElse(null));
+        newMessage.setReceiver(userRepository.findById(receiverId).orElse(null));
         return messageRepository.save(newMessage);
     }
 

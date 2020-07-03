@@ -23,7 +23,7 @@ public class Like {
     @NotNull
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "liker_id")
-    private Person liker;
+    private User liker;
 
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
