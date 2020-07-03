@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequiredArgsConstructor
 @RequestMapping("/api")
 public class CountryController {
     @Autowired

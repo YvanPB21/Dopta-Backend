@@ -3,6 +3,7 @@ package com.dopta.controller;
 import com.dopta.model.Locatable;
 import com.dopta.service.LocatableService;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
