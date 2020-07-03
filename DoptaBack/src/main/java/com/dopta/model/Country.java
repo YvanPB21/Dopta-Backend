@@ -18,7 +18,4 @@ public class Country {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "locatable_id")
-    private Locatable locatable;
 }

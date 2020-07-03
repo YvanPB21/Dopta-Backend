@@ -21,7 +21,4 @@ public class District {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "department_id")
     private Department department;
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "locatable_id")
-    private Locatable locatable;
 }
