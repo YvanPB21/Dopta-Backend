@@ -38,6 +38,11 @@ public class AdoptionProcessServiceImpl implements AdoptionProcessService {
     }
 
     @Override
+    public Page<AdoptionProcess> getAdoptionProcessByPosterId(Integer petId, Pageable pageable) {
+        return adoptionProcessRepository.findAllByPosterId(petId, pageable);
+    }
+
+    @Override
     public Page<AdoptionProcess> getAdoptionProcessByPet(Pet pet, Pageable pageable) {
         return adoptionProcessRepository.findAllByPet(pet, pageable);
     }

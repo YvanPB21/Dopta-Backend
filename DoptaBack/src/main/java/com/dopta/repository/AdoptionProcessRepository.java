@@ -17,4 +17,5 @@ public interface AdoptionProcessRepository extends JpaRepository<AdoptionProcess
     Page<AdoptionProcess> findAllByAdopterId(Integer userId, Pageable pageable);
 
     Page<AdoptionProcess> findAllByPosterId(Integer userId, Pageable pageable);
+
 }
