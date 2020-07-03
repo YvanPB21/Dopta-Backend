@@ -22,6 +22,7 @@ import java.util.stream.Collectors;
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/api")
 public class PromoController {
     @Autowired
     private ModelMapper mapper;
@@ -30,10 +31,10 @@ public class PromoController {
 
     @Operation(summary = "Get Promos", description = "Get all promos by Pages", tags = {"promos"})
     @GetMapping("/promos")
-    public Page<PromoResource> getAllPromos(@Parameter(description = "Pageable parameter") Pageable pageable) {
+    public List<PromoResource> getAllPromos(@Parameter(description = "Pageable parameter") Pageable pageable) {
         Page<Promo> promoPage = promoService.getAllPromos(pageable);
         List<PromoResource> resources = promoPage.getContent().stream().map(this::convertToResource).collect(Collectors.toList());
-        return new PageImpl<>(resources, pageable, resources.size());
+        return resources;
     }
 
     @Operation(summary = "Get Promo by Id", description = "Get a promo by specifying Id", tags = {"promos"})
@@ -46,13 +47,13 @@ public class PromoController {
 
     @Operation(summary = "Get Promos by corporation Id", description = "Get promos by specifying Corporation Id", tags = {"promos"})
     @GetMapping("/promos/corporation/{corporationId}")
-    public Page<PromoResource> getPromosByCorporationId(
+    public List<PromoResource> getPromosByCorporationId(
             @Parameter(description = "Pageable parameter") Pageable pageable,
             @Parameter(description = "Corporation Id")
             @PathVariable(name = "corporationId") Integer corporationId) {
         Page<Promo> promoPage = promoService.getAllPromosByCorporationId(corporationId, pageable);
         List<PromoResource> resources = promoPage.getContent().stream().map(this::convertToResource).collect(Collectors.toList());
-        return new PageImpl<>(resources, pageable, resources.size());
+        return resources;
     }
 
     @PostMapping("/promos")

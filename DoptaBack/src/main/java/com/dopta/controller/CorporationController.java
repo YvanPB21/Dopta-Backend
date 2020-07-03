@@ -28,10 +28,10 @@ public class CorporationController {
     private CorporationService corporationService;
 
     @GetMapping("/corporations")
-    public Page<CorporationResource> getAllCorporations(Pageable pageable) {
+    public List<CorporationResource> getAllCorporations(Pageable pageable) {
         List<CorporationResource> corporationResources = corporationService.getAllCorporations(pageable)
                 .getContent().stream().map(this::convertToResource).collect(Collectors.toList());
-        return new PageImpl<>(corporationResources, pageable, corporationResources.size());
+        return corporationResources;
     }
 
     @GetMapping("/corporations/{userId}")

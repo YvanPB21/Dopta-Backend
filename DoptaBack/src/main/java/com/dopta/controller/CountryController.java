@@ -10,12 +10,14 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@CrossOrigin(origins = "http://localhost:4200")
+@RestController
+@RequestMapping("/api")
 public class CountryController {
     @Autowired
     private CountryService countryService;
 
-    @GetMapping("{id}")
+    @GetMapping("/country/{id}")
     public ResponseEntity<Country> getById(@PathVariable Integer id) {
         Country country = countryService.getCountry(id);
         if (country == null)
@@ -24,7 +26,7 @@ public class CountryController {
             return (ResponseEntity.ok(country));
     }
 
-    @GetMapping
+    @GetMapping("/country")
     public ResponseEntity<List<Country>> listCountry() {
         List<Country> countries = new ArrayList<>();
         countries = countryService.listAllCountry();
@@ -34,17 +36,17 @@ public class CountryController {
         return ResponseEntity.ok(countries);
     }
 
-    @PostMapping
+    @PostMapping("/country")
     public ResponseEntity<Country> newCountry(@RequestBody Country country) {
         return ResponseEntity.status(HttpStatus.CREATED).body(countryService.save(country));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/countr/{id}")
     public ResponseEntity<Country> updateCountry(@RequestBody Country country, @PathVariable Integer id) {
         return ResponseEntity.status(HttpStatus.OK).body(countryService.edit(country, id));
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/country/{id}")
     public ResponseEntity<Country> deleteCountry(@PathVariable Integer id) {
         countryService.deleteById(id);
         return ResponseEntity.noContent().build();

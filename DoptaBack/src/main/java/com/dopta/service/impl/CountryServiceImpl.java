@@ -5,11 +5,12 @@ import com.dopta.model.Country;
 import com.dopta.repository.CountryRepository;
 import com.dopta.service.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
-
+@Service
 public class CountryServiceImpl implements CountryService {
 
     @Autowired

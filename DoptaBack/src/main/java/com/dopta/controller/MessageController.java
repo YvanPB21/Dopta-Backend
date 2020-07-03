@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
-
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api")
@@ -27,13 +27,13 @@ public class MessageController {
     private MessageService messageService;
 
     @GetMapping("/messages/{senderId}/{receiverId}")
-    public Page<MessageResource> getAllMessagesBySenderIdAndReceiverId(
+    public List<MessageResource> getAllMessagesBySenderIdAndReceiverId(
             @PathVariable(name = "senderId") Integer senderId,
             @PathVariable(name = "receiverId") Integer receiverId,
             Pageable pageable) {
         Page<Message> messagePage = messageService.getAllMessagesBySenderIdAndReceiverId(senderId, receiverId, pageable);
         List<MessageResource> resources = messagePage.getContent().stream().map(this::convertToResource).collect(Collectors.toList());
-        return new PageImpl<>(resources, pageable, resources.size());
+        return resources;
     }
 
     @GetMapping("/messages/{messageId}")

@@ -17,6 +17,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api")
@@ -27,12 +28,12 @@ public class CommentController {
     private CommentService commentService;
 
     @GetMapping("/posts/{postId}/comments")
-    public Page<CommentResource> getAllCommentsByPostId(
+    public List<CommentResource> getAllCommentsByPostId(
             @PathVariable(name = "postId") Integer postId,
             Pageable pageable) {
         Page<Comment> commentPage = commentService.getAllCommentsByAdoptionProcessId(postId, pageable);
         List<CommentResource> resources = commentPage.getContent().stream().map(this::convertToResource).collect(Collectors.toList());
-        return new PageImpl<>(resources, pageable, resources.size());
+        return resources;
     }
 
     @GetMapping("/posts/{postId}/comments/{commentId}")

@@ -23,6 +23,7 @@ import java.util.stream.Collectors;
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/api")
 public class AdoptionProcessController {
 
     @Autowired
@@ -32,10 +33,10 @@ public class AdoptionProcessController {
 
     @Operation(summary = "Get Adoptions", description = "Get all adoptions by Pages", tags = {"adoptions"})
     @GetMapping("/adoptions")
-    public Page<AdoptionProcessResource> getAllAdoptionProcesses(Pageable pageable) {
+    public List<AdoptionProcessResource> getAllAdoptionProcesses(Pageable pageable) {
         Page<AdoptionProcess> adoptionProcessPage = adoptionProcessService.getAllAdoptionProcesses(pageable);
         List<AdoptionProcessResource> resources = adoptionProcessPage.getContent().stream().map(this::convertToResource).collect(Collectors.toList());
-        return new PageImpl<>(resources, pageable, resources.size());
+        return resources;
     }
 
     @Operation(summary = "Get Adoptions by Id", description = "Get an adoption by specifying Id", tags = {"adoptions"})
@@ -46,10 +47,10 @@ public class AdoptionProcessController {
 
     @Operation(summary = "Get Adoptions by Pet Id", description = "Get an adoption by specyfing the Id of the associated Pet", tags = {"adoptions"})
     @GetMapping("/pets/{petId}/adoptions")
-    public Page<AdoptionProcessResource> getAllAdoptionProcessesByPetId(@PathVariable(name = "petId") Integer petId, Pageable pageable) {
+    public List<AdoptionProcessResource> getAllAdoptionProcessesByPetId(@PathVariable(name = "petId") Integer petId, Pageable pageable) {
         Page<AdoptionProcess> adoptionProcessPage = adoptionProcessService.getAdoptionProcessByPetId(petId, pageable);
         List<AdoptionProcessResource> resources = adoptionProcessPage.getContent().stream().map(this::convertToResource).collect(Collectors.toList());
-        return new PageImpl<>(resources, pageable, resources.size());
+        return resources;
     }
 
     @PostMapping("/adoptions")

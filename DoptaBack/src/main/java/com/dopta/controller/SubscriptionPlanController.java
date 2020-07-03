@@ -23,6 +23,7 @@ import java.util.stream.Collectors;
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/api")
 public class SubscriptionPlanController {
     @Autowired
     private ModelMapper mapper;
@@ -31,10 +32,10 @@ public class SubscriptionPlanController {
 
     @Operation(summary = "Get Subscription Plans", description = "Get all subscription plans by Pages", tags = {"subscriptionplans"})
     @GetMapping("/subscriptionplans")
-    public Page<SubscriptionPlanResource> getAllSubscriptionPlans(@Parameter(description = "Pageable parameter") Pageable pageable) {
+    public List<SubscriptionPlanResource> getAllSubscriptionPlans(@Parameter(description = "Pageable parameter") Pageable pageable) {
         Page<SubscriptionPlan> subscriptionPlanPage = subscriptionPlanService.getAllSubscriptionPlans(pageable);
         List<SubscriptionPlanResource> resources = subscriptionPlanPage.getContent().stream().map(this::convertToResource).collect(Collectors.toList());
-        return new PageImpl<>(resources, pageable, resources.size());
+        return resources;
     }
 
     @Operation(summary = "Get SubscriptionPlan by Id", description = "Get a subscriptionPlan by specifying Id", tags = {"subscriptionplans"})

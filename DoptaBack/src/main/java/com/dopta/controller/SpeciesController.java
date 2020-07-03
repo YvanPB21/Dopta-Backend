@@ -23,7 +23,9 @@ import java.util.stream.Collectors;
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/api")
 public class SpeciesController {
+
     @Autowired
     private ModelMapper mapper;
     @Autowired
@@ -31,10 +33,10 @@ public class SpeciesController {
 
     @Operation(summary = "Get Species", description = "Get all species by Pages", tags = {"species"})
     @GetMapping("/species")
-    public Page<SpeciesResource> getAllSpecies(@Parameter(description = "Pageable parameter") Pageable pageable) {
+    public List<SpeciesResource> getAllSpecies(@Parameter(description = "Pageable parameter") Pageable pageable) {
         Page<Species> speciesPage = speciesService.getAllSpecies(pageable);
         List<SpeciesResource> resources = speciesPage.getContent().stream().map(this::convertToResource).collect(Collectors.toList());
-        return new PageImpl<>(resources, pageable, resources.size());
+        return resources;
     }
 
     @Operation(summary = "Get Species by Id", description = "Get a species by specifying Id", tags = {"species"})

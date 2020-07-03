@@ -17,6 +17,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api")
@@ -28,12 +29,12 @@ public class LikeController {
     private LikeService likeService;
 
     @GetMapping("/posts/{postId}/likes")
-    public Page<LikeResource> getAllLikesByPostId(
+    public List<LikeResource> getAllLikesByPostId(
             @PathVariable(name = "postId") Integer postId,
             Pageable pageable) {
         Page<Like> likePage = likeService.getAllLikesByAdoptionProcessId(postId, pageable);
         List<LikeResource> resources = likePage.getContent().stream().map(this::convertToResource).collect(Collectors.toList());
-        return new PageImpl<>(resources, pageable, resources.size());
+        return resources;
     }
 
     @GetMapping("/posts/{postId}/likes/{likeId}")

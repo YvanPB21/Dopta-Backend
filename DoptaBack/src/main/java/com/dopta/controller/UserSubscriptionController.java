@@ -22,6 +22,7 @@ import java.util.stream.Collectors;
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/api")
 public class UserSubscriptionController {
     @Autowired
     private ModelMapper mapper;
@@ -30,10 +31,10 @@ public class UserSubscriptionController {
 
     @Operation(summary = "Get User Subscriptions", description = "Get all user subscriptions by Pages", tags = {"usersubscriptions"})
     @GetMapping("/usersubscriptions")
-    public Page<UserSubscriptionResource> getAllUserSubscriptions(@Parameter(description = "Pageable parameter") Pageable pageable) {
+    public List<UserSubscriptionResource> getAllUserSubscriptions(@Parameter(description = "Pageable parameter") Pageable pageable) {
         Page<UserSubscription> userSubscriptionPage = userSubscriptionService.getAllSubscriptions(pageable);
         List<UserSubscriptionResource> resources = userSubscriptionPage.getContent().stream().map(this::convertToResource).collect(Collectors.toList());
-        return new PageImpl<>(resources, pageable, resources.size());
+        return resources;
     }
 
     @Operation(summary = "Get User Subscription by Id", description = "Get a user subscription by specifying Id", tags = {"usersubscriptions"})
@@ -46,36 +47,36 @@ public class UserSubscriptionController {
 
     @Operation(summary = "Get User Subscriptions by user Id", description = "Get user subscriptions by specifying User Id", tags = {"usersubscriptions"})
     @GetMapping("/usersubscriptions/user/{userId}")
-    public Page<UserSubscriptionResource> getUserSubscriptionsByUserId(
+    public List<UserSubscriptionResource> getUserSubscriptionsByUserId(
             @Parameter(description = "Pageable parameter") Pageable pageable,
             @Parameter(description = "User Id")
             @PathVariable(name = "userId") Integer userId) {
         Page<UserSubscription> userSubscriptionPage = userSubscriptionService.getUserSubscriptionByUserId(userId, pageable);
         List<UserSubscriptionResource> resources = userSubscriptionPage.getContent().stream().map(this::convertToResource).collect(Collectors.toList());
-        return new PageImpl<>(resources, pageable, resources.size());
+        return resources;
     }
 
     @Operation(summary = "Get UserSubscriptions by Subscription Plan Id", description = "Get user subscriptions by specifying subscription plan Id", tags = {"usersubscriptions"})
     @GetMapping("/usersubscriptions/subscriptionplan/{subscriptionPlanId}")
-    public Page<UserSubscriptionResource> getUserSubscriptionsBySubscriptionPlanId(
+    public List<UserSubscriptionResource> getUserSubscriptionsBySubscriptionPlanId(
             @Parameter(description = "Pageable parameter") Pageable pageable,
             @Parameter(description = "SubscriptionPlan Id")
             @PathVariable(name = "subscriptionPlanId") Integer subscriptionPlanId) {
         Page<UserSubscription> userSubscriptionPage = userSubscriptionService.getUserSubscriptionBySubscriptionPlanId(subscriptionPlanId, pageable);
         List<UserSubscriptionResource> resources = userSubscriptionPage.getContent().stream().map(this::convertToResource).collect(Collectors.toList());
-        return new PageImpl<>(resources, pageable, resources.size());
+        return resources;
     }
 
     @Operation(summary = "Get User Subscriptions by user Id and Subscription Plan Id", description = "Get user subscriptions by specifying User Id and Subscription Plan Id", tags = {"usersubscriptions"})
     @GetMapping(value = {"/usersubscriptions/user/{userId}/subscriptionplan/{subscriptionPlanId}", "/usersubscriptions/subscriptionplan/{subscriptionPlanId}/user/{userId}"})
-    public Page<UserSubscriptionResource> getUserSubscriptionsByUserIdAndSubscriptionPlanId(
+    public List<UserSubscriptionResource> getUserSubscriptionsByUserIdAndSubscriptionPlanId(
             @Parameter(description = "Pageable parameter") Pageable pageable,
             @Parameter(description = "User Id") @PathVariable(name = "userId") Integer userId,
             @Parameter(description = "SubscriptionPlan Id") @PathVariable(name = "subscriptionPlanId") Integer subscriptionPlanId
     ) {
         Page<UserSubscription> userSubscriptionPage = userSubscriptionService.getUserSubscriptionByUserIdAndSubscriptionPlanId(userId, subscriptionPlanId, pageable);
         List<UserSubscriptionResource> resources = userSubscriptionPage.getContent().stream().map(this::convertToResource).collect(Collectors.toList());
-        return new PageImpl<>(resources, pageable, resources.size());
+        return resources;
     }
 
     @PostMapping("/usersubscriptions")

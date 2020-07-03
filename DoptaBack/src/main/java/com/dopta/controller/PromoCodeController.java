@@ -22,6 +22,7 @@ import java.util.stream.Collectors;
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/api")
 public class PromoCodeController {
     @Autowired
     private ModelMapper mapper;
@@ -30,10 +31,10 @@ public class PromoCodeController {
 
     @Operation(summary = "Get Promo Codes", description = "Get all promocodes by Pages", tags = {"promocodes"})
     @GetMapping("/promocodes")
-    public Page<PromoCodeResource> getAllPromoCodes(@Parameter(description = "Pageable parameter") Pageable pageable) {
+    public List<PromoCodeResource> getAllPromoCodes(@Parameter(description = "Pageable parameter") Pageable pageable) {
         Page<PromoCode> promoCodePage = promoCodeService.getAllPromoCodes(pageable);
         List<PromoCodeResource> resources = promoCodePage.getContent().stream().map(this::convertToResource).collect(Collectors.toList());
-        return new PageImpl<>(resources, pageable, resources.size());
+        return resources;
     }
 
     @Operation(summary = "Get PromoCode by Id", description = "Get a promoCode by specifying Id", tags = {"promocodes"})
@@ -57,13 +58,13 @@ public class PromoCodeController {
 
     @Operation(summary = "Get PromoCodes by user Id", description = "Get promoCodes by specifying User Id", tags = {"promocodes"})
     @GetMapping("/promocodes/user/{userId}")
-    public Page<PromoCodeResource> getPromoCodesByUserId(
+    public List<PromoCodeResource> getPromoCodesByUserId(
             @Parameter(description = "Pageable parameter") Pageable pageable,
             @Parameter(description = "User Id")
             @PathVariable(name = "userId") Integer userId) {
         Page<PromoCode> promoCodePage = promoCodeService.getAllPromoCodesByUserId(userId, pageable);
         List<PromoCodeResource> resources = promoCodePage.getContent().stream().map(this::convertToResource).collect(Collectors.toList());
-        return new PageImpl<>(resources, pageable, resources.size());
+        return resources;
     }
 
     @PostMapping("/promocodes")
