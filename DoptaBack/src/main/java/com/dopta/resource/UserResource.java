@@ -15,8 +15,9 @@ public class UserResource extends AuditModel {
     private String password;
     private String profile_pic_url;
     private Date date_of_registration;
-    private String name;
+    private String names;
     private String last_names;
     private Integer dni;
     private Date date_of_birth;
+    private GenderResource gender;
 }

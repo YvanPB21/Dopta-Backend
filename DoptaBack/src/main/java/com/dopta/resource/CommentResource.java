@@ -10,4 +10,5 @@ public class CommentResource extends AuditModel {
     private Integer id;
     private String content;
     private java.util.Date date;
+    private UserResource commenter;
 }
