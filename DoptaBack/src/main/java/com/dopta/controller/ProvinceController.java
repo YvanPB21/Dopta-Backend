@@ -17,7 +17,7 @@ public class ProvinceController {
     @Autowired
     private ProvinceService provinceService;
 
-    @GetMapping("/province/{id}")
+    @GetMapping("/department/{id}")
     public ResponseEntity<Province> getById(@PathVariable Integer id) {
         Province province = provinceService.getProvince(id);
         if (province == null)
@@ -26,7 +26,7 @@ public class ProvinceController {
             return (ResponseEntity.ok(province));
     }
 
-    @GetMapping("/province")
+    @GetMapping("/department")
     public ResponseEntity<List<Province>> listProvince() {
         List<Province> provinces = new ArrayList<>();
         provinces = provinceService.listAllProvince();
@@ -36,17 +36,17 @@ public class ProvinceController {
         return ResponseEntity.ok(provinces);
     }
 
-    @PostMapping("/province")
+    @PostMapping("/department")
     public ResponseEntity<Province> newProvince(@RequestBody Province province) {
         return ResponseEntity.status(HttpStatus.CREATED).body(provinceService.save(province));
     }
 
-    @PutMapping("/province/{id}")
+    @PutMapping("/department/{id}")
     public ResponseEntity<Province> updateProvince(@RequestBody Province province, @PathVariable Integer id) {
         return ResponseEntity.status(HttpStatus.OK).body(provinceService.edit(province, id));
     }
 
-    @DeleteMapping("/province/{id}")
+    @DeleteMapping("/department/{id}")
     public ResponseEntity<Province> deleteProvince(@PathVariable Integer id) {
         provinceService.deleteById(id);
         return ResponseEntity.noContent().build();
