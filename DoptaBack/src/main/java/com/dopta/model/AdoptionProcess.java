@@ -22,7 +22,7 @@ public class AdoptionProcess {
     @NotNull
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "poster_id")
-    private Person poster;
+    private User poster;
 
     @NotNull
     @ManyToOne(fetch = FetchType.EAGER)
@@ -42,6 +42,6 @@ public class AdoptionProcess {
     @NotNull
     @ManyToOne(optional = true, fetch = FetchType.EAGER)
     @JoinColumn(nullable = true)
-    private Person adopter;
+    private User adopter;
 
 }

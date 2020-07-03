@@ -6,13 +6,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 
 public interface CorporationService {
-    Corporation getCorporationByUserId(Integer userId);
+    Corporation getCorporationById(Integer Id);
 
     Page<Corporation> getAllCorporations(Pageable pageable);
 
-    Corporation createCorporation(Integer userId, Corporation corporation);
+    Corporation createCorporation(Corporation corporation, Integer districtId, Integer locatableId);
 
-    Corporation updateCorporation(Integer corporationId, Corporation corporationDetails);
+    Corporation updateCorporation(Integer corporationId, Integer districtId, Integer locatable, Corporation corporationDetails);
 
     ResponseEntity<?> deleteCorporation(Integer corporationId);
 }

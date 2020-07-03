@@ -9,9 +9,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.Null;
 
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "user_type",
-        discriminatorType = DiscriminatorType.INTEGER)
+
 @Data
 @NoArgsConstructor
 @Builder
@@ -19,6 +17,8 @@ import javax.validation.constraints.Null;
 @Entity
 @Table(name = "users")
 public class User {
+
+    /**User**/
     @NotNull
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,18 +33,33 @@ public class User {
     @NotNull
     private String password;
 
-    @Null
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_profile_id")
-    private UserProfile userProfile;
+    /**user profiles**/
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "district_id")
+    private District district;
 
-    @Null
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "person_id")
-    private Person person;
+    private String profile_pic_url;
 
-    @Null
+    @Temporal(TemporalType.TIMESTAMP)
+    private java.util.Date date_of_registration;
+
     @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "corporation_id")
-    private Corporation corporation;
+    @JoinColumn(name = "locatable_id")
+    private Locatable locatable;
+
+    /**person**/
+    private String names;
+
+    private String last_names;
+
+    private Integer dni;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private java.util.Date date_of_birth;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "gender_id")
+    private Gender gender;
+
+
 }

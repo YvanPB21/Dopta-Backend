@@ -10,9 +10,9 @@ public interface UserService {
 
     Page<User> getAllUsers(Pageable pageable);
 
-    User createUser(User user);
+    User createUser(User user, Integer districtId, Integer locatableId, Integer genderId);
 
-    User updateUser(Integer id, User userDetails);
+    User updateUser(Integer id, Integer districtId, Integer locatableId, Integer genderId, User userDetails);
 
     ResponseEntity<?> deleteUser(Integer userId);
 }

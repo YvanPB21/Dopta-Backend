@@ -34,7 +34,7 @@ public class Comment {
     @NotNull
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "commenter_id")
-    private Person poster;
+    private User user;
 
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)

@@ -4,7 +4,7 @@ import com.dopta.exception.ResourceNotFoundException;
 import com.dopta.model.Comment;
 import com.dopta.repository.AdoptionProcessRepository;
 import com.dopta.repository.CommentRepository;
-import com.dopta.repository.PersonRepository;
+import com.dopta.repository.UserRepository;
 import com.dopta.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -25,7 +25,7 @@ public class CommentServiceImpl implements CommentService {
     private CommentRepository commentRepository;
 
     @Autowired
-    private PersonRepository personRepository;
+    private UserRepository userRepository;
 
     @Override
     public Page<Comment> getAllCommentsByAdoptionProcessId(Integer adoptionProcessId, Pageable pageable) {
@@ -48,8 +48,7 @@ public class CommentServiceImpl implements CommentService {
         newComment.setContent(comment.getContent());
         newComment.setDate(comment.getDate());
         newComment.setAdoptionProcess(adoptionProcessRepository.findById(adoptionProcessId).orElse(null));
-        newComment.setPoster(personRepository.findById(posterId).orElse(null));
-
+        newComment.setUser(userRepository.findById(posterId).orElse(null));
         return commentRepository.save(newComment);
     }
 
