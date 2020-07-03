@@ -14,7 +14,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Entity
 @Table(name = "corporations")
-public class Corporation extends User {
+public class Corporation{
 
     @NotNull
     @Id
