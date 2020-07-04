@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -48,7 +49,7 @@ public class UserServiceImpl implements UserService {
         newUser.setDistrict(districtRepository.findById(districtId).orElseThrow(() -> new ResourceNotFoundException("District", "Id", districtId)));
         newUser.setLocatable(locatableRepository.findById(locatableId).orElseThrow(() -> new ResourceNotFoundException("Locatable", "Id", locatableId)));
         newUser.setGender(genderRepository.findById(genderId).orElseThrow(() -> new ResourceNotFoundException("Gender", "Id", genderId)));
-        newUser.setEmail_address(user.getEmail_address());
+        newUser.setEmailAddress(user.getEmailAddress());
         newUser.setUsername(user.getUsername());
         newUser.setPassword(user.getPassword());
         newUser.setProfile_pic_url(user.getProfile_pic_url());
@@ -73,7 +74,7 @@ public class UserServiceImpl implements UserService {
             us.setDistrict(districtRepository.findById(districtId).orElseThrow(() -> new ResourceNotFoundException("District", "Id", districtId)));
             us.setLocatable(locatableRepository.findById(locatableId).orElseThrow(() -> new ResourceNotFoundException("Locatable", "Id", locatableId)));
             us.setGender(genderRepository.findById(genderId).orElseThrow(() -> new ResourceNotFoundException("Gender", "Id", genderId)));
-            us.setEmail_address(userDetails.getEmail_address());
+            us.setEmailAddress(userDetails.getEmailAddress());
             us.setUsername(userDetails.getUsername());
             us.setPassword(userDetails.getPassword());
             us.setProfile_pic_url(userDetails.getProfile_pic_url());
@@ -93,6 +94,26 @@ public class UserServiceImpl implements UserService {
             userRepository.delete(us);
             return ResponseEntity.ok().build();
         }).orElseThrow(() -> new ResourceNotFoundException("User", "Id", userId));
+    }
+
+    @Override
+    public Optional<User> getByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
+
+    @Override
+    public boolean existsByUsername(String username) {
+        return userRepository.existsByUsername(username);
+    }
+
+    @Override
+    public boolean existsByEmailAdress(String email) {
+        return userRepository.existsByEmailAddress(email);
+    }
+
+    @Override
+    public void save(User usuario) {
+        userRepository.save(usuario);
     }
 }
 

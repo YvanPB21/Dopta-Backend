@@ -5,13 +5,15 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
 public class SaveUserResource {
     /**User**/
     @NotNull
-    private String email_address;
+    private String emailAdress;
 
     @NotNull
     private String username;
@@ -41,4 +43,5 @@ public class SaveUserResource {
     @Temporal(TemporalType.TIMESTAMP)
     private java.util.Date date_of_birth;
 
+    private Set<String> roles = new HashSet<>();
 }
