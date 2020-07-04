@@ -60,7 +60,7 @@ public class AdoptionProcessController {
         return resources;
     }
 
-    @PostMapping("/adoptions/")
+    @PostMapping("/adoptions")
     public AdoptionProcessResource createAdoptionProcess(@Valid @RequestBody SaveAdoptionProcessResource resource) {
         AdoptionProcess adoptionProcess = convertToEntity(resource);
         return convertToResource(adoptionProcessService.createAdoptionProcess(adoptionProcess));
