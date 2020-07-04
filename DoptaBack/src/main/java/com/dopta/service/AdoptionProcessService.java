@@ -17,7 +17,7 @@ public interface AdoptionProcessService {
 
     Page<AdoptionProcess> getAllAdoptionProcesses(Pageable pageable);
 
-    AdoptionProcess createAdoptionProcess(AdoptionProcess adoptionProcess, Integer petId, Integer publisherId, Integer adopterId);
+    AdoptionProcess createAdoptionProcess(AdoptionProcess adoptionProcess);
 
     AdoptionProcess editAdoptionProcess(AdoptionProcess adoptionProcessRequest, Integer adoptionProcessId, Integer petId, Integer posterId, Integer adopterId);
 

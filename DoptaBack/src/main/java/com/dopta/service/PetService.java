@@ -25,7 +25,7 @@ public interface PetService {
 
     Page<Pet> getAllPets(Pageable pageable);
 
-    Pet createPet(Pet pet, Integer sizeId, Integer speciesId, Integer sexId);
+    Pet createPet(Pet pet);
 
     Pet editPet(Pet petRequest, Integer petId, Integer sizeId, Integer speciesId, Integer sexId);
 

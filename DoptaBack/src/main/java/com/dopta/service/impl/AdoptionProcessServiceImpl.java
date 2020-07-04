@@ -54,19 +54,9 @@ public class AdoptionProcessServiceImpl implements AdoptionProcessService {
 
     @Override
     @Transactional
-    public AdoptionProcess createAdoptionProcess(AdoptionProcess adoptionProcess, Integer petId, Integer adopterId, Integer posterId) {
-        AdoptionProcess newProcess = new AdoptionProcess();
-        newProcess.setPet(petRepository.findById(petId).orElseThrow(() -> new ResourceNotFoundException("Pet", "Id", petId)));
-        newProcess.setDate_published(adoptionProcess.getDate_published());
-        newProcess.setDate_adopted(adoptionProcess.getDate_adopted());
-        newProcess.setDescription(adoptionProcess.getDescription());
-        newProcess.setAdopter(userRepository.findById(adopterId).orElseThrow(() -> new ResourceNotFoundException("Adopter", "Id", adopterId)));
-        newProcess.setPoster(userRepository.findById(posterId).orElseThrow(() -> new ResourceNotFoundException("Poster", "Id", posterId)));
-
-        return adoptionProcessRepository.save(newProcess);
+    public AdoptionProcess createAdoptionProcess(AdoptionProcess adoptionProcess) {
+        return adoptionProcessRepository.save(adoptionProcess);
     }
-
-    /*TODO revisar*/
 
     @Override
     @Transactional

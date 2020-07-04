@@ -115,9 +115,9 @@ public class PetController {
     }
 
     @PostMapping("/pets")
-    public PetResource createPet(@Valid @RequestBody SavePetResource resource, Integer speciesId, Integer sexId, Integer sizeId) {
+    public PetResource createPet(@Valid @RequestBody SavePetResource resource) {
         Pet pet = convertToEntity(resource);
-        return convertToResource(petService.createPet(pet, sizeId, speciesId, sexId));
+        return convertToResource(petService.createPet(pet));
     }
 
     @PutMapping("/pets/{petId}")

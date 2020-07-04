@@ -76,17 +76,7 @@ public class PetServiceImpl implements PetService {
 
     @Override
     @Transactional
-    public Pet createPet(Pet pet, Integer sizeId, Integer speciesId, Integer sexId) {
-        Pet newPet = new Pet();
-        newPet.setName(pet.getName());
-        newPet.setDate_of_birth(pet.getDate_of_birth());
-        newPet.setImage_url(pet.getImage_url());
-        newPet.setIs_adopted(pet.getIs_adopted());
-        newPet.setSex(sexRepository.findById(sexId).orElseThrow(() -> new ResourceNotFoundException("Sex", "Id", sexId)));
-        newPet.setSpecies(speciesRepository.findById(speciesId).orElseThrow(() -> new ResourceNotFoundException("Species", "Id", speciesId)));
-        newPet.setSize(sizeRepository.findById(sizeId).orElseThrow(() -> new ResourceNotFoundException("Size", "Id", sizeId)));
-        return petRepository.save(newPet);
-    }
+    public Pet createPet(Pet pet) { return petRepository.save(pet); }
 
     @Override
     @Transactional

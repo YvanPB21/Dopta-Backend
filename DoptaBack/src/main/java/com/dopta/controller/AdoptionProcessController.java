@@ -31,7 +31,7 @@ public class AdoptionProcessController {
     @Autowired
     private AdoptionProcessService adoptionProcessService;
 
-    @Operation(summary = "Get Adoptions", description = "Get all adoptions by Pages", tags = {"adoptions"})
+    @Operation(summary = "Get Adoptions", description = "Get all adoptions by Pages")
     @GetMapping("/adoptions")
     public List<AdoptionProcessResource> getAllAdoptionProcesses(Pageable pageable) {
         Page<AdoptionProcess> adoptionProcessPage = adoptionProcessService.getAllAdoptionProcesses(pageable);
@@ -39,20 +39,20 @@ public class AdoptionProcessController {
         return resources;
     }
 
-    @Operation(summary = "Get Adoptions by Id", description = "Get an adoption by specifying Id", tags = {"adoptions"})
+    @Operation(summary = "Get Adoptions by Id", description = "Get an adoption by specifying Id")
     @GetMapping("/adoptions/{id}")
     public AdoptionProcessResource getAdoptionProcessById(@PathVariable(name = "id") Integer adoptionProcessId) {
         return convertToResource(adoptionProcessService.getAdoptionProcessById(adoptionProcessId));
     }
 
-    @Operation(summary = "Get Adoptions by Pet Id", description = "Get an adoption by specyfing the Id of the associated Pet", tags = {"adoptions"})
+    @Operation(summary = "Get Adoptions by Pet Id", description = "Get an adoption by specyfing the Id of the associated Pet")
     @GetMapping("/pets/{petId}/adoptions")
     public List<AdoptionProcessResource> getAllAdoptionProcessesByPetId(@PathVariable(name = "petId") Integer petId, Pageable pageable) {
         Page<AdoptionProcess> adoptionProcessPage = adoptionProcessService.getAdoptionProcessByPetId(petId, pageable);
         List<AdoptionProcessResource> resources = adoptionProcessPage.getContent().stream().map(this::convertToResource).collect(Collectors.toList());
         return resources;
     }
-    @Operation(summary = "Get Adoptions by Poster Id", description = "Get adoptions by specyfing the Id of the associated Posters", tags = {"adoptions"})
+    @Operation(summary = "Get Adoptions by Poster Id", description = "Get adoptions by specyfing the Id of the associated Posters")
     @GetMapping("/adoptions/{posterId}/posters")
     public List<AdoptionProcessResource> getAllAdoptionProcessesByPosterId(@PathVariable(name = "posterId") Integer posterId, Pageable pageable) {
         Page<AdoptionProcess> adoptionProcessPage = adoptionProcessService.getAdoptionProcessByPosterId(posterId, pageable);
@@ -60,10 +60,10 @@ public class AdoptionProcessController {
         return resources;
     }
 
-    @PostMapping("/adoptions")
-    public AdoptionProcessResource createAdoptionProcess(@Valid @RequestBody SaveAdoptionProcessResource resource, Integer petId, Integer posterId, Integer adopterId) {
+    @PostMapping("/adoptions/")
+    public AdoptionProcessResource createAdoptionProcess(@Valid @RequestBody SaveAdoptionProcessResource resource) {
         AdoptionProcess adoptionProcess = convertToEntity(resource);
-        return convertToResource(adoptionProcessService.createAdoptionProcess(adoptionProcess, petId, posterId, adopterId));
+        return convertToResource(adoptionProcessService.createAdoptionProcess(adoptionProcess));
     }
 
     @PutMapping("/adoptions/{adoptionProcessId}")
