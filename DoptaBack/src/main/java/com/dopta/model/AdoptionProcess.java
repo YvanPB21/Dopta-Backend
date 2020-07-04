@@ -39,7 +39,6 @@ public class AdoptionProcess {
     @Temporal(TemporalType.TIMESTAMP)
     private java.util.Date date_adopted;
 
-    @NotNull
     @ManyToOne(optional = true, fetch = FetchType.EAGER)
     @JoinColumn(nullable = true)
     private User adopter;
